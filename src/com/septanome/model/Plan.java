@@ -1,12 +1,15 @@
 package com.septanome.model;
 
 import java.util.*;
+import java.io.File;
 
 public class Plan {
-	private List<Point> pointsLivraison;
-	private List<Route> routes;
+	//private HashMap<long,Route> routesMap;
+	//private List<Route> routes;
 	
-	public Plan(file filename) {
-		//A completer..
+	public Plan(File filename) {
+		//A completer.
+		//charger un XML.
+	
 	}
 }

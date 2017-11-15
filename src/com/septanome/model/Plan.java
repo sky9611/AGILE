@@ -1,12 +1,15 @@
 package com.septanome.model;
 
 import java.util.*;
+import java.io.File;
 
 public class Plan {
-	private List<Point> pointsLivraison;
-	private List<Route> routes;
+	private HashMap<Long,Point> pointsMap;
+	private HashMap<Long,HashMap<Long,Troncon>> tronconsMap;
 	
-	public Plan(file filename) {
-		//A completer..
+	public Plan(HashMap<Long,Point> pointsMap,HashMap<Long,HashMap<Long,Troncon>> tronconsMap) {
+		this.pointsMap = pointsMap;
+		this.tronconsMap = tronconsMap;
 	}
+	
 }

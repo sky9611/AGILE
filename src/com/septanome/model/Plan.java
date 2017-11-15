@@ -4,12 +4,12 @@ import java.util.*;
 import java.io.File;
 
 public class Plan {
-	//private HashMap<long,Route> routesMap;
-	//private List<Route> routes;
+	private HashMap<Long,Point> pointsMap;
+	private HashMap<Long,HashMap<Long,Troncon>> tronconsMap;
 	
-	public Plan(File filename) {
-		//A completer.
-		//charger un XML.
-	
+	public Plan(HashMap<Long,Point> pointsMap,HashMap<Long,HashMap<Long,Troncon>> tronconsMap) {
+		this.pointsMap = pointsMap;
+		this.tronconsMap = tronconsMap;
 	}
+	
 }

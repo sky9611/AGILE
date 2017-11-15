@@ -15,9 +15,13 @@ import org.w3c.dom.NodeList;
 import com.septanome.model.Point;
 import com.septanome.model.Troncon;
 
+/**
+ * Some tools to load XML files or create an XML file
+*/
 
 public class utilXML {
 
+	/** @param(folder) Chemin d'accès au fichier XML */
 	public HashMap<Long, Point> loadPoint(String folder) {
 		//Vector<Point> points = new Vector<Point>(); 
 		Point point;
@@ -50,7 +54,7 @@ public class utilXML {
 		    } 
 	}
 	
-	
+	/** @param(folder) Chemin d'accès au fichier XML */
 	public HashMap<Long, HashMap<Long, Troncon>> loadTroncon(String folder) {
 		//Vector<Troncon> troncons = new Vector<Troncon>(); 
 		Troncon troncon;
@@ -76,8 +80,7 @@ public class utilXML {
 					Long origine = Long.parseLong(eElement.getAttribute("origine"));
 					troncon = new Troncon(dest, length, street, origine);
 					h.put(origine,troncon);
-					troncons.put(dest, h);	
-					
+					troncons.put(dest, h);						
 				} 
 			}
 			return troncons;

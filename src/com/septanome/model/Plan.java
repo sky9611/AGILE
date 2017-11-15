@@ -12,4 +12,11 @@ public class Plan {
 		this.tronconsMap = tronconsMap;
 	}
 	
+	public HashMap<Long,Point> getPointsMap(){
+		return pointsMap;
+	}
+	
+	public HashMap<Long,HashMap<Long,Troncon>> getTronconsMap(){
+		return tronconsMap;
+	}
 }

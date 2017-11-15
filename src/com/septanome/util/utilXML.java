@@ -1,6 +1,7 @@
 package com.septanome.util;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Vector;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -17,9 +18,10 @@ import com.septanome.model.Troncon;
 
 public class utilXML {
 
-	public Vector<Point> loadPoint(String folder) {
-		Vector<Point> points = new Vector<Point>(); 
+	public HashMap<Long, Point> loadPoint(String folder) {
+		//Vector<Point> points = new Vector<Point>(); 
 		Point point;
+		HashMap<Long, Point> points = new HashMap<Long, Point>(); 
 		
 		try {
 			File fXmlFile = new File(folder);
@@ -38,7 +40,7 @@ public class utilXML {
 					int x = Integer.parseInt(eElement.getAttribute("x"));
 					int y = Integer.parseInt(eElement.getAttribute("y"));
 					point = new Point(id, x, y);
-					points.add(point);					
+					points.put(id, point);					
 				} 
 			}
 			return points;
@@ -49,9 +51,11 @@ public class utilXML {
 	}
 	
 	
-	public Vector<Troncon> loadTroncon(String folder) {
-		Vector<Troncon> troncons = new Vector<Troncon>(); 
+	public HashMap<Long, HashMap<Long, Troncon>> loadTroncon(String folder) {
+		//Vector<Troncon> troncons = new Vector<Troncon>(); 
 		Troncon troncon;
+		HashMap<Long, Troncon> h = new HashMap<Long, Troncon>(); 
+		HashMap<Long, HashMap<Long, Troncon>> troncons = new HashMap<Long, HashMap<Long, Troncon>>();
 		
 		try {
 			File fXmlFile = new File(folder);
@@ -70,8 +74,9 @@ public class utilXML {
 					double length = Double.parseDouble(eElement.getAttribute("longueur"));
 					String street = eElement.getAttribute("nomRue");
 					Long origine = Long.parseLong(eElement.getAttribute("origine"));
-					troncon = new Troncon(dest, length, street, origine);					
-					troncons.add(troncon);	
+					troncon = new Troncon(dest, length, street, origine);
+					h.put(origine,troncon);
+					troncons.put(dest, h);	
 					
 				} 
 			}

@@ -4,16 +4,12 @@ public class Livraison extends Point{
 	private int heureDeDebut;
 	private int heureDeFin;
 	
-	public Livraison(Point point, int heureDeDebut, int heureDeFin) {
-		this.point = point;
+	public Livraison	(long id,  int coordX, int coordY, int heureDeDebut, int heureDeFin) {
+		super(id,heureDeDebut,heureDeFin);
 		this.heureDeDebut = heureDeDebut;
 		this.heureDeFin = heureDeFin;
 	}
-	
-	public Point getPoint() {
-		return point;
-		System.out.println("tt tian skc de JJ");
-	}
+
 	public int getHeureDeDebut() {
 		return heureDeDebut;
 	}

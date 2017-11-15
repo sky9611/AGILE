@@ -1,9 +1,8 @@
 package com.septanome.model;
 
-public class Livraison {
+public class Livraison extends Point{
 	private int heureDeDebut;
 	private int heureDeFin;
-	private Point point;
 	
 	public Livraison(Point point, int heureDeDebut, int heureDeFin) {
 		this.point = point;

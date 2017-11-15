@@ -12,6 +12,7 @@ public class Livraison extends Point{
 	
 	public Point getPoint() {
 		return point;
+		System.out.println("tt tian skc de JJ");
 	}
 	public int getHeureDeDebut() {
 		return heureDeDebut;

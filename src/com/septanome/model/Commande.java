@@ -1,9 +1,9 @@
-package objet;
+package com.septanome.model;
 
 public class Commande {
-	Livraison[] livraisons;
-	Point entrepot;
-	int heureDepart;
+	private Livraison[] livraisons;
+	private Point entrepot;
+	private int heureDepart;
 	
 	public Commande(Livraison[] l,Point p,int h){
 		livraisons=new Livraison[l.length];

@@ -1,11 +1,11 @@
-package objet;
+package com.septanome.model;
 
 public class Route {
-	int longueur;
-	long id;
-	long origineID;
-	long destinationID;
-	String nom;
+	private int longueur;
+	private long id;
+	private long origineID;
+	private long destinationID;
+	private String nom;
 
 	public Route(int l,long i,long o,long d,String n){
 		longueur=l;

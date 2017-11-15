@@ -1,23 +1,23 @@
 package com.septanome.model;
 
 public class Livraison {
-	private int heureDeDebut;
-	private int heureDeFin;
-	private Point point;
+	private int heureDebut;
+	private int heureFin;
 	
-	public Livraison(Point point, int heureDeDebut, int heureDeFin) {
-		this.point = point;
-		this.heureDeDebut = heureDeDebut;
-		this.heureDeFin = heureDeFin;
+	public Livraison(int d,int f){
+		heureDebut=d;
+		heureFin=f;
 	}
-	
-	public Point getPoint() {
-		return point;
+	public void setHeureDebut(int d){
+		heureDebut=d;
 	}
-	public int getHeureDeDebut() {
-		return heureDeDebut;
+	public void setHeureFin(int f){
+		heureFin=f;
 	}
-	public int getHeureDeFin() {
-		return heureDeFin;
+	public int getHeureDebut(){
+		return heureDebut;
+	}
+	public int getHeureFin(){
+		return heureFin;
 	}
 }

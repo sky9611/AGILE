@@ -1,7 +1,7 @@
-package objet;
+package com.septanome.model;
 
 public class Tournee {
-	Point[] ordreLivraison;
+	private Point[] ordreLivraison;
 	
 	public Tournee(	Point[] l){
 		ordreLivraison=new Point[l.length];

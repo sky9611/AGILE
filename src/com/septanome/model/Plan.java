@@ -1,8 +1,8 @@
-package objet;
+package com.septanome.model;
 
 public class Plan {
-	Route[] routes;
-	Point[] pointsLivraison;
+	private Route[] routes;
+	private Point[] pointsLivraison;
 	
 	public Plan(Route[] r,Point[] p){
 		routes=new Route[r.length];

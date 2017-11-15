@@ -12,4 +12,5 @@ public class Tournee {
 	public List<Point> getListOrdreLivraison(){
 		return ordresDeLivraisons;
 	}
+	System.out.println("ttsb");
 }

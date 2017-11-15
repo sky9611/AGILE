@@ -2,7 +2,10 @@ package com.septanome.service;
 
 import java.io.File;
 
+import com.septanome.model.Plan;
+
 public class serviceMetier {
+	private Plan plan;
 	
 	/**
 	* initialise le plan
@@ -11,4 +14,6 @@ public class serviceMetier {
 	public void initPlan(String nomFicher) {
 		
 	}
+	
+	
 }

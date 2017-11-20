@@ -43,9 +43,25 @@ public class serviceMetier {
 	 *Initialiser le plan avec que les points de livrson et les routes le plus court entre eux calcule par dijkstra 
 	 */
 	public void initPlanLivraison() {
-		
-		
-	}
+        //l'entrepot est considere comme un objet Livraison dont l'attribut heureDeDepart devient heureDeDebut et heureDeFin est 9999 par defaut
+        Livraison livraison = new Livraison(commande.getEntrepot().getId(),commande.getEntrepot().getCoordX(),commande.getEntrepot().getCoordY(),commande.getHeureDeDepart(),9999);      
+        HashMap<Long,Livraison> livraisonsMap = new HashMap<Long,Livraison>();
+        HashMap<Long,HashMap<Long,Chemin>> cheminsMap = new HashMap<Long,HashMap<Long,Chemin>>();
+        HashMap<Long,Chemin> cm = new HashMap<Long,Chemin>();
+        for (Livraison l:commande.getListLivraison()) {
+            livraisonsMap.put(l.getId(),l);
+            cm.clear();
+            for(Livraison l2:commande.getListLivraison()) {
+                if(!l.equals(l2)) {
+                    cm.put(l2.getId(), calcLePlusCourtChemin(l.getId(), l2.getId()));
+                }          
+            }
+            cm.put(commande.getEntrepot().getId(), calcLePlusCourtChemin(l.getId(),commande.getEntrepot().getId()));
+            cheminsMap.put(l.getId(),cm);
+        }
+        planLivraison.setLivraisonMap(livraisonsMap);
+        planLivraison.setCheminsMap(cheminsMap);
+    }
 	
 	/**
 	 *Chercher dans le Plan total le longeur de chemin plus court de livraison origine vers destination
@@ -121,5 +137,7 @@ public class serviceMetier {
 	 */
 	public void obtenirLeTournee() {
 		//TODO
+		
+		
 	}
 }

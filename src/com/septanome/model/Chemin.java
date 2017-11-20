@@ -41,5 +41,9 @@ public class Chemin {
 		this.troncons = troncons;
 	}
 	
+	public double getLongeur(){
+		return longeur;
+	}
+	
 }
 

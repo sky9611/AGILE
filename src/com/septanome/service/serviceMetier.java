@@ -11,16 +11,19 @@ import java.util.List;
 
 import com.septanome.model.*;
 import com.septanome.util.*;
-import com.septanome.util.utilXML;
+
+import tsp.TemplateTSP;
 public class serviceMetier {
 	public static int noPath = 9999;
 	private Plan plan;
 	private PlanLivraison planLivraison;
 	private Commande commande;
 	private Tournee tournee;
-	private int length; //nombre de points stocke dans plan
+	private int length; //nombre de points stocke dans n
+	private int nombreDeLivraison;
 	private utilXML myUtil;
-	
+	private TemplateTSP tsp;
+	private final double vitesse = 15000/3600;
 	/**
 	* Initialiser le plan total a partir d'un ficher XML
 	* @nomFicherDePlan: nom du ficher xml a lire  
@@ -38,6 +41,7 @@ public class serviceMetier {
 	 */
 	public void initCommande(String nomFicherDeCommande) {
 		commande = myUtil.loadCommande(nomFicherDeCommande, plan);
+		nombreDeLivraison = commande.getListLivraison().size();
 	}
 	
 	/**
@@ -147,8 +151,39 @@ public class serviceMetier {
 	
 	/**
 	 *Trouver le tournee final en utilisant le plan de livraison genere
+	 *@param b consider or not the time interval
 	 */
-	public void obtenirLeTournee() {
+	public void obtenirLeTournee(boolean b) {
+		if (b) {
+			
+		} else {
+			int tpsLimite = 1000;
+			HashMap<Long,HashMap<Long,Chemin>> cheminsMap = planLivraison.getCheminsMap();
+			int[][] cout = new int[cheminsMap.size()+1][cheminsMap.size()+1];
+			for(int i=0;i<nombreDeLivraison+1;i++) {
+				long startID = 0;
+				long desID = 0;
+				if(i==0) {
+					startID = commande.getEntrepot().getId();
+				} else {
+					startID = commande.getListLivraison().get(i-1).getId();
+				}
+				for(int j=0;j<nombreDeLivraison+1;j++) {
+					if(j==0) {
+						desID = commande.getEntrepot().getId();
+					} else {
+						desID = commande.getListLivraison().get(j-1).getId();
+					}
+					if(startID == desID) {
+						cout[i][j] = 0;
+					} else {
+						cout[i][j] = (int)(cheminsMap.get(startID).get(desID).getLongeur()/vitesse);
+					}
+				}
+			}
+			int[] duree = new int[cheminsMap.size()+1];
+			tsp.chercheSolution(tpsLimite, length, cout, duree);
+		}
 		//TODO
 		
 		

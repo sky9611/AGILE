@@ -37,6 +37,10 @@ public class Troncon {
 		this.setOrigineID(origine);
 	}
 	
+	@Override
+	public String toString() {
+		return origineID+"->"+destinationID+"("+nom+", "+longeur+")";
+	}
 	
 	
 	

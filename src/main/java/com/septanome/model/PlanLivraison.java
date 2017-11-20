@@ -11,6 +11,10 @@ public class PlanLivraison {
 		this.cheminsMap = cheminsMap;
 	}
 	
+	public PlanLivraison() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public HashMap<Long,Livraison> getLivraisonsMap(){
 		return livraisonsMap;
 	}

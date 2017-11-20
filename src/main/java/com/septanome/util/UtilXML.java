@@ -2,6 +2,7 @@ package main.java.com.septanome.util;
 
 import java.io.File;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +32,7 @@ import main.java.com.septanome.model.Troncon;
  * Some tools to load XML files or create an XML file
 */
 
-public class utilXML {
+public class UtilXML {
 
 	/** @param folder Path to XML file */
 	public HashMap<Long, Point> loadPoint(String folder) {
@@ -67,7 +68,7 @@ public class utilXML {
 	/** @param folder Path to XML file*/
 	public HashMap<Long, HashMap<Long, Troncon>> loadTroncon(String folder) {
 		Troncon troncon;
-		HashMap<Long, Troncon> h = new HashMap<Long, Troncon>(); 
+		
 		HashMap<Long, HashMap<Long, Troncon>> troncons = new HashMap<Long, HashMap<Long, Troncon>>();
 		
 		try {
@@ -78,6 +79,7 @@ public class utilXML {
 			doc.getDocumentElement().normalize();
 			doc.getDocumentElement().getNodeName();
 			NodeList nList = doc.getElementsByTagName("troncon");			
+			//HashMap<Long,Troncon> tronconOriginMap = new ArrayList<>(;)
 			for (int temp = 0; temp < nList.getLength(); temp++) {
 				Node nNode = nList.item(temp);
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -87,8 +89,17 @@ public class utilXML {
 					String street = eElement.getAttribute("nomRue");
 					Long origine = Long.parseLong(eElement.getAttribute("origine"));
 					troncon = new Troncon(dest, length, street, origine);
-					h.put(origine,troncon);
-					troncons.put(dest, h);						
+					//System.out.println(troncon);	
+//					h.put(dest,troncon);
+//					troncons.put(origine, h);			
+					HashMap<Long, Troncon> h = new HashMap<Long, Troncon>(); 
+					h.put(dest,troncon);
+					if(troncons.get(origine)==null) {
+						troncons.put(origine, h);
+					} else {
+						troncons.get(origine).put(dest, troncon);
+					}
+					//tronconList.add(troncon);
 				} 
 			}
 			return troncons;
@@ -158,6 +169,7 @@ public class utilXML {
 						int hd = Integer.parseInt(eElement.getAttribute("hd"));
 						int hf = Integer.parseInt(eElement.getAttribute("hf"));
 						livraison = new Livraison(p.getId(), p.getCoordX(), p.getCoordY(), hd, hf);
+						System.out.println(livraison);
 						liste.add(livraison);
 					} else {
 						System.out.println("Ce noeud n'existe pas : " + x + " " + y);
@@ -196,52 +208,43 @@ public class utilXML {
 	           
 		     DocumentBuilderFactory factory =  DocumentBuilderFactory.newInstance();  
 		     DocumentBuilder builder = factory.newDocumentBuilder();  
-		           
-		         Document document = builder.newDocument();   
-		         //创建属性名、赋值  
-		         Element root = document.createElement("Languages");  
-		         root.setAttribute("cat", "it");  
-		  
-		                 //创建第一个根节点、赋值  
-		         Element lan = document.createElement("lan");  
-		         lan.setAttribute("id", "1");  
-		         Element name = document.createElement("name");  
-		         name.setTextContent("java");  
-		         Element ide = document.createElement("IDE");  
-		         ide.setTextContent("Eclipse");  
-		         lan.appendChild(name);  
-		         lan.appendChild(ide);  
-		             
-		         //创建第二个根节点、赋值  
-		         Element lan2 = document.createElement("lan");  
-		         lan2.setAttribute("id", "2");  
-		         Element name2 = document.createElement("name");  
-		         name2.setTextContent("Swift");  
-		         Element ide2 = document.createElement("ide");  
-		         ide2.setTextContent("XCode");  
-		         lan2.appendChild(name2);  
-		         lan2.appendChild(ide2);  
-		           
-		                 //添加到属性中、  
-		         root.appendChild(lan);  
-		                 root.appendChild(lan2);      
-		                 document.appendChild(root);  
-		           
-		                //定义了用于处理转换指令，以及执行从源到结果的转换的  
-		        TransformerFactory transformerFactory = TransformerFactory.newInstance();  
-		        Transformer transformer = transformerFactory.newTransformer();  
-		        transformer.setOutputProperty("encoding", "UTF-8");  
-		              
-		        StringWriter writer = new StringWriter();  
-		        transformer.transform(new DOMSource(document), new StreamResult(writer));  
-		        System.out.println(writer.toString());  
-		              
-		        transformer.transform(new DOMSource(document), new StreamResult(new File(folder)));     
+
+		     Document document = builder.newDocument();    
+		     Element root = document.createElement("Languages");
+		     root.setAttribute("cat", "it");  
+		     Element lan = document.createElement("lan");  
+		     lan.setAttribute("id", "1");  
+		     Element name = document.createElement("name");  
+		     name.setTextContent("java");  
+		     Element ide = document.createElement("IDE");  
+		     ide.setTextContent("Eclipse");  
+		     lan.appendChild(name);  
+		     lan.appendChild(ide);   
+		     Element lan2 = document.createElement("lan");  
+		     lan2.setAttribute("id", "2");  
+		     Element name2 = document.createElement("name");  
+		     name2.setTextContent("Swift");  
+		     Element ide2 = document.createElement("ide");  
+		     ide2.setTextContent("XCode");  
+		     lan2.appendChild(name2);  
+		     lan2.appendChild(ide2);  
 		          
-		          
-		    } catch (ParserConfigurationException | TransformerException e) {  
-		        e.printStackTrace();  
-		    }
+		     root.appendChild(lan);  
+		     root.appendChild(lan2);      
+		     document.appendChild(root);   
+		     TransformerFactory transformerFactory = TransformerFactory.newInstance();  
+		     Transformer transformer = transformerFactory.newTransformer();  
+		     transformer.setOutputProperty("encoding", "UTF-8");  
+		     
+		     StringWriter writer = new StringWriter();  
+		     transformer.transform(new DOMSource(document), new StreamResult(writer));  
+		     System.out.println(writer.toString());  
+		     
+		     transformer.transform(new DOMSource(document), new StreamResult(new File(folder)));
+		 } catch (ParserConfigurationException | TransformerException e) {  
+			 e.printStackTrace();  
+		 }
+
 	}
 	
 	public void bubbleSort(int a[]) {

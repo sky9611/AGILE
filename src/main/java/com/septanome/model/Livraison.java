@@ -5,7 +5,7 @@ public class Livraison extends Point {
 	private int heureDeFin;
 
 	public Livraison(long id, int coordX, int coordY, int heureDeDebut, int heureDeFin) {
-		super(id, heureDeDebut, heureDeFin);
+		super(id, coordX, coordY);
 		this.heureDeDebut = heureDeDebut;
 		this.heureDeFin = heureDeFin;
 	}
@@ -23,5 +23,9 @@ public class Livraison extends Point {
 	}
 	public void setHeureDeFin(int heureDeFin) {
 		this.heureDeFin = heureDeFin;
+	}
+	@Override
+	public String toString() {
+		return "("+id+", "+coordX+", "+coordY+", "+heureDeDebut+", "+heureDeFin+")";
 	}
 }

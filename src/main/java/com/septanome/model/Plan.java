@@ -13,6 +13,12 @@ public class Plan {
 		this.tronconsMap = tronconsMap;
 	}
 	
+	public Plan() {
+		// TODO Auto-generated constructor stub
+		this.pointsMap = new HashMap<Long,Point>();
+		this.tronconsMap =  new HashMap<Long,HashMap<Long,Troncon>>();
+	}
+
 	public HashMap<Long,Point> getPointsMap(){
 		return pointsMap;
 	}

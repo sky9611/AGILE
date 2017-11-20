@@ -198,11 +198,11 @@ public class utilXML {
 		     DocumentBuilder builder = factory.newDocumentBuilder();  
 		           
 		         Document document = builder.newDocument();   
-		         //创建属性名、赋值  
+		        
 		         Element root = document.createElement("Languages");  
 		         root.setAttribute("cat", "it");  
 		  
-		                 //创建第一个根节点、赋值  
+		   
 		         Element lan = document.createElement("lan");  
 		         lan.setAttribute("id", "1");  
 		         Element name = document.createElement("name");  
@@ -212,7 +212,7 @@ public class utilXML {
 		         lan.appendChild(name);  
 		         lan.appendChild(ide);  
 		             
-		         //创建第二个根节点、赋值  
+		       
 		         Element lan2 = document.createElement("lan");  
 		         lan2.setAttribute("id", "2");  
 		         Element name2 = document.createElement("name");  
@@ -222,12 +222,12 @@ public class utilXML {
 		         lan2.appendChild(name2);  
 		         lan2.appendChild(ide2);  
 		           
-		                 //添加到属性中、  
+		                
 		         root.appendChild(lan);  
 		                 root.appendChild(lan2);      
 		                 document.appendChild(root);  
 		           
-		                //定义了用于处理转换指令，以及执行从源到结果的转换的  
+		          
 		        TransformerFactory transformerFactory = TransformerFactory.newInstance();  
 		        Transformer transformer = transformerFactory.newTransformer();  
 		        transformer.setOutputProperty("encoding", "UTF-8");  
@@ -243,7 +243,6 @@ public class utilXML {
 		        e.printStackTrace();  
 		    }
 	}
-	
 	
 	
 	

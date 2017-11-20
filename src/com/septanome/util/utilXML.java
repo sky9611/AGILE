@@ -2,6 +2,8 @@ package com.septanome.util;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -12,6 +14,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.septanome.model.Commande;
+import com.septanome.model.Livraison;
 import com.septanome.model.Point;
 import com.septanome.model.Troncon;
 
@@ -23,7 +27,6 @@ public class utilXML {
 
 	/** @param(folder) Chemin d'accès au fichier XML */
 	public HashMap<Long, Point> loadPoint(String folder) {
-		//Vector<Point> points = new Vector<Point>(); 
 		Point point;
 		HashMap<Long, Point> points = new HashMap<Long, Point>(); 
 		
@@ -32,7 +35,6 @@ public class utilXML {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(fXmlFile);
-
 			doc.getDocumentElement().normalize();
 			doc.getDocumentElement().getNodeName();
 			NodeList nList = doc.getElementsByTagName("noeud");			
@@ -56,7 +58,6 @@ public class utilXML {
 	
 	/** @param(folder) Chemin d'accès au fichier XML */
 	public HashMap<Long, HashMap<Long, Troncon>> loadTroncon(String folder) {
-		//Vector<Troncon> troncons = new Vector<Troncon>(); 
 		Troncon troncon;
 		HashMap<Long, Troncon> h = new HashMap<Long, Troncon>(); 
 		HashMap<Long, HashMap<Long, Troncon>> troncons = new HashMap<Long, HashMap<Long, Troncon>>();
@@ -66,7 +67,6 @@ public class utilXML {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(fXmlFile);
-
 			doc.getDocumentElement().normalize();
 			doc.getDocumentElement().getNodeName();
 			NodeList nList = doc.getElementsByTagName("troncon");			
@@ -90,6 +90,82 @@ public class utilXML {
 		    } 
 	}
 	
+	public Commande loadCommande(String folder, HashMap<Long, Point> hash) {
+		Commande commande;
+		Livraison livraison;
+		List<Livraison> liste = new Vector<Livraison>();
+		Point entrepot = null;
+		int heure = -1;
 	
+		try {
+			File fXmlFile = new File(folder);
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(fXmlFile);
+			doc.getDocumentElement().normalize();
+			doc.getDocumentElement().getNodeName();
+			
+			//Get entrepot attributes
+			NodeList nList = doc.getElementsByTagName("Entrepot");
+			for (int temp = 0; temp < nList.getLength(); temp++) {
+				Node nNode = nList.item(temp);
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) 
+				{
+					Element eElement = (Element) nNode;
+					int x = Integer.parseInt(eElement.getAttribute("x"));
+					int y = Integer.parseInt(eElement.getAttribute("y"));
+					heure = Integer.parseInt(eElement.getAttribute("h"));
+					entrepot = findPointbyCoords(x,y, hash);
+				}
+			}
+			
+			if(entrepot == null) {
+				System.out.println("Entrepot localisation not found");
+				return null;
+			}
+			
+			if(heure < 0 || heure > 24) {
+				System.out.println("Hour format incorrect");
+				return null;
+			}
+			
+			nList = doc.getElementsByTagName("Livraison");
+			for (int temp = 0; temp < nList.getLength(); temp++) {
+				Node nNode = nList.item(temp);
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element eElement = (Element) nNode;
+					int x = Integer.parseInt(eElement.getAttribute("x"));
+					int y = Integer.parseInt(eElement.getAttribute("y"));
+					//long d = Long.parseLong(eElement.getAttribute("d"));
+					Point p = findPointbyCoords(x,y, hash);
+					
+					if(p != null) {
+						int hd = Integer.parseInt(eElement.getAttribute("hd"));
+						int hf = Integer.parseInt(eElement.getAttribute("hf"));
+						livraison = new Livraison(p.getId(), p.getCoordX(), p.getCoordY(), hd, hf);
+						liste.add(livraison);
+					} else {
+						System.out.println("Ce noeud n'existe pas : " + x + " " + y);
+					}				
+				}
+			}
+			commande = new Commande(heure, entrepot, liste);
+			return commande;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		  } 	
+		}
+	
+	public Point findPointbyCoords(int x, int y, HashMap<Long, Point> hash) {
+		Point point = null;
+		for(Map.Entry<Long,Point> entry:hash.entrySet()) {
+			Point p = entry.getValue();
+			if(p.getCoordX()==x && p.getCoordY()==y) {
+				point = p; 
+			}
+		}		
+		return point;		
+	}
 	
 }

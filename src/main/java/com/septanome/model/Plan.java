@@ -1,4 +1,4 @@
-package com.septanome.model;
+package main.java.com.septanome.model;
 
 import java.util.*;
 

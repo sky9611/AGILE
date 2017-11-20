@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<reseau>
-<noeud id="1029591870" x="15427" y="27866"/>
-<noeud id="21702438" x="15478" y="27664"/>
-<troncon destination="1029591870" longueur="14.0" nomRue="Avenue des Frères Lumière" origine="21702438"/>
-</reseau>
-

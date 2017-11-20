@@ -54,7 +54,7 @@ public class serviceMetier {
         for (Livraison l:commande.getListLivraison()) {
             livraisonsMap.put(l.getId(),l);
             cm.clear();
-            cheminsMap.put(l.getId(),calcLePlusCourtChemin(l.getId()));
+            cheminsMap.putAll(calcLePlusCourtChemin(l.getId()));
         }
         planLivraison.setLivraisonsMap(livraisonsMap);
         planLivraison.setCheminsMap(cheminsMap);
@@ -63,7 +63,7 @@ public class serviceMetier {
 	/**
 	 *Chercher dans le Plan total la longueur de chemin plus courte de livraison origine vers destination
 	 */ 
-	public HashMap<Long,Chemin> calcLePlusCourtChemin(long origineID) {
+	public HashMap<Long,HashMap<Long,Chemin>> calcLePlusCourtChemin(long origineID) {
 		//Chemin chemin = new Chemin();
 		class dist implements Comparable<dist> {
 			long index;
@@ -137,12 +137,12 @@ public class serviceMetier {
         	long tempSta = 0;
         	while(prev.get(tempDes)!=null) {
         		tempSta = prev.get(tempDes);
-        		tronconList.add(tronconMap.get(tempDes).get(tempSta));
+        		tronconList.add(tronconMap.get(tempSta).get(tempDes));
         	}
         	Chemin chemin = new Chemin(id,origineID,tronconList);
         	origineCheminMap.put(id, chemin);
         }
-		return origineCheminMap;
+		return cheminMap;
 	}
 	
 	/**

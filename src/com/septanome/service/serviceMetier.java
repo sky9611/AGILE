@@ -45,20 +45,16 @@ public class serviceMetier {
 	 */
 	public void initPlanLivraison() {
         //l'entrepot est considere comme un objet Livraison dont l'attribut heureDeDepart devient heureDeDebut et heureDeFin est 9999 par defaut
-        Livraison livraison = new Livraison(commande.getEntrepot().getId(),commande.getEntrepot().getCoordX(),commande.getEntrepot().getCoordY(),commande.getHeureDeDepart(),9999);      
+        Livraison entrepot = new Livraison(commande.getEntrepot().getId(),commande.getEntrepot().getCoordX(),commande.getEntrepot().getCoordY(),commande.getHeureDeDepart(),9999);      
+        
         HashMap<Long,Livraison> livraisonsMap = new HashMap<Long,Livraison>();
+        livraisonsMap.put(entrepot.getId(), entrepot);
         HashMap<Long,HashMap<Long,Chemin>> cheminsMap = new HashMap<Long,HashMap<Long,Chemin>>();
         HashMap<Long,Chemin> cm = new HashMap<Long,Chemin>();
         for (Livraison l:commande.getListLivraison()) {
             livraisonsMap.put(l.getId(),l);
             cm.clear();
-            for(Livraison l2:commande.getListLivraison()) {
-                if(!l.equals(l2)) {
-                    cm.put(l2.getId(), calcLePlusCourtChemin(l.getId(), l2.getId()));
-                }          
-            }
-            cm.put(commande.getEntrepot().getId(), calcLePlusCourtChemin(l.getId(),commande.getEntrepot().getId()));
-            cheminsMap.put(l.getId(),cm);
+            cheminsMap.put(l.getId(),calcLePlusCourtChemin(l.getId()));
         }
         planLivraison.setLivraisonsMap(livraisonsMap);
         planLivraison.setCheminsMap(cheminsMap);
@@ -67,7 +63,7 @@ public class serviceMetier {
 	/**
 	 *Chercher dans le Plan total la longueur de chemin plus courte de livraison origine vers destination
 	 */ 
-	public HashMap<Long,HashMap<Long,Chemin>> calcLePlusCourtChemin(long origineID) {
+	public HashMap<Long,Chemin> calcLePlusCourtChemin(long origineID) {
 		//Chemin chemin = new Chemin();
 		class dist implements Comparable<dist> {
 			long index;
@@ -146,8 +142,7 @@ public class serviceMetier {
         	Chemin chemin = new Chemin(id,origineID,tronconList);
         	origineCheminMap.put(id, chemin);
         }
-        cheminMap.put(origineID, origineCheminMap);
-		return cheminMap;
+		return origineCheminMap;
 	}
 	
 	/**

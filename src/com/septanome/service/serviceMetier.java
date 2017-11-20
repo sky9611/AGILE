@@ -83,7 +83,6 @@ public class serviceMetier {
 				}
 			}
 		}
-		List<Livraison> path = null;
 		boolean[] s = new boolean[length];
 		//HashMap<Long, Integer> indexMap = new HashMap<Long, Integer>();
 		HashMap<Long, Point> pointsMap = plan.getPointsMap();

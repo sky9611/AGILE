@@ -141,6 +141,7 @@ public class serviceMetier {
         	Chemin chemin = new Chemin(id,origineID,tronconList);
         	origineCheminMap.put(id, chemin);
         }
+        cheminMap.put(origineID, origineCheminMap);
 		return cheminMap;
 	}
 	

@@ -20,11 +20,25 @@ public class Chemin {
 	public long getDestinationPointID(){
 		return destinationPointID;
 	}
+	
+	public void setDestinationPointID(long destinationPointID) {
+		this.destinationPointID = destinationPointID;
+	}
+	
 	public long getOriginePointID(){
 		return originePointID;
 	}
+	
+	public void setOriginePointID(long originePointID) {
+		this.originePointID = originePointID;
+	}
+	
 	public List<Troncon> getTroncons(){
 		return troncons;
+	}
+	
+	public void setTroncons(List<Troncon> troncons) {
+		this.troncons = troncons;
 	}
 	
 }

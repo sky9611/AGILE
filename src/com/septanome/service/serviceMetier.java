@@ -40,7 +40,7 @@ public class serviceMetier {
 	}
 	
 	/**
-	 *Initialiser le plan avec que les points de livrson et les routes le plus court entre eux calcule par dijkstra 
+	 *Initialiser le plan avec que les points de livraison et les routes les plus courts entre eux calcules par dijkstra 
 	 */
 	public void initPlanLivraison() {
         //l'entrepot est considere comme un objet Livraison dont l'attribut heureDeDepart devient heureDeDebut et heureDeFin est 9999 par defaut
@@ -64,7 +64,7 @@ public class serviceMetier {
     }
 	
 	/**
-	 *Chercher dans le Plan total le longeur de chemin plus court de livraison origine vers destination
+	 *Chercher dans le Plan total la longueur de chemin plus courte de livraison origine vers destination
 	 */ 
 	public Chemin calcLePlusCourtChemin(long destinationID, long origineID) {
 		//Chemin chemin = new Chemin();
@@ -133,7 +133,7 @@ public class serviceMetier {
 	}
 	
 	/**
-	 *Trouver le tournee final en utlisant le plan de livraison genere
+	 *Trouver le tournee final en utilisant le plan de livraison genere
 	 */
 	public void obtenirLeTournee() {
 		//TODO

@@ -18,7 +18,15 @@ public class Plan {
 		return pointsMap;
 	}
 	
+	public void setPointMap(HashMap<Long,Point> pointsMap){
+		this.pointsMap = pointsMap;
+	}
+	
 	public HashMap<Long,HashMap<Long,Troncon>> getTronconsMap(){
 		return tronconsMap;
+	}
+	
+	public void setTronconsMap(HashMap<Long,HashMap<Long,Troncon>> tronconsMap) {
+		this.tronconsMap = tronconsMap;
 	}
 }

@@ -16,10 +16,24 @@ public class Commande {
 	public int getHeureDeDepart() {
 		return heureDeDepart;
 	}
+	
+	public void setHeureDeDepart(int heureDeDepart) {
+		this.heureDeDepart = heureDeDepart;
+	}
+	
 	public Point getEntrepot() {
 		return entrepot;
 	}
+	
+	public void setEntrepot(Point entrepot) {
+		this.entrepot = entrepot;
+	}
+	
 	public List<Livraison> getListLivraison(){
 		return livraisons;
+	}
+	
+	public void setLivraisons(List<Livraison> livraisons) {
+		this.livraisons = livraisons;
 	}
 }

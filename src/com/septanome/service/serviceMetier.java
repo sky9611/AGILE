@@ -8,7 +8,8 @@ import java.util.Map.Entry;
 import java.util.List;
 
 import com.septanome.model.*;
-
+import com.septanome.util.*;
+import com.septanome.util.utilXML;
 public class serviceMetier {
 	public static int noPath = 9999;
 	private Plan plan;
@@ -16,6 +17,7 @@ public class serviceMetier {
 	private Commande commande;
 	private Tournee tournee;
 	private int length; //nombre de points stocke dans plan
+	private utilXML myUtil;
 	
 	/**
 	* Initialiser le plan total a partir d'un ficher XML
@@ -23,6 +25,9 @@ public class serviceMetier {
 	*/
 	public void initPlan(String nomFicherDePlan) {
 		//TODO
+		
+		plan.setPointMap(myUtil.loadPoint(nomFicherDePlan));
+		plan.setTronconsMap(myUtil.loadTroncon(nomFicherDePlan));
 		length = plan.getPointsMap().size();
 	}
 	

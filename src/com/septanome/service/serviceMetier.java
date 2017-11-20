@@ -59,7 +59,7 @@ public class serviceMetier {
             cm.put(commande.getEntrepot().getId(), calcLePlusCourtChemin(l.getId(),commande.getEntrepot().getId()));
             cheminsMap.put(l.getId(),cm);
         }
-        planLivraison.setLivraisonMap(livraisonsMap);
+        planLivraison.setLivraisonsMap(livraisonsMap);
         planLivraison.setCheminsMap(cheminsMap);
     }
 	

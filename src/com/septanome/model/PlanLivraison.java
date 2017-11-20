@@ -15,7 +15,7 @@ public class PlanLivraison {
 		return livraisonsMap;
 	}
 	
-	public void setLivraisonMap(HashMap<Long,Livraison> livraisonsMap) {
+	public void setLivraisonsMap(HashMap<Long,Livraison> livraisonsMap) {
 		this.livraisonsMap = livraisonsMap;
 	}
 	

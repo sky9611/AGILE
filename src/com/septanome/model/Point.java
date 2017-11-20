@@ -19,7 +19,7 @@ public class Point {
 	public int getCoordY() {
 		return coordY;
 	}
-	public void setCoordXX(int coordY) {
+	public void setCoordY(int coordY) {
 		this.coordY = coordY;
 	}
 	public long getId() {

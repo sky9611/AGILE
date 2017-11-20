@@ -15,7 +15,15 @@ public class PlanLivraison {
 		return livraisonsMap;
 	}
 	
+	public void setLivraisonMap(HashMap<Long,Livraison> livraisonsMap) {
+		this.livraisonsMap = livraisonsMap;
+	}
+	
 	public HashMap<Long,HashMap<Long,Chemin>> getCheminsMap(){
 		return cheminsMap;
+	}
+	
+	public void setCheminsMap(HashMap<Long,HashMap<Long,Chemin>> cheminsMap) {
+		this.cheminsMap = cheminsMap;
 	}
 }

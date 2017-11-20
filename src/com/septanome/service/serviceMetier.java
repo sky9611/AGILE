@@ -18,7 +18,7 @@ public class serviceMetier {
 	private Tournee tournee;
 	private int length; //nombre de points stocke dans plan
 	private utilXML myUtil;
-	private Livraison livraison;
+	
 	
 	/**
 	* Initialiser le plan total a partir d'un ficher XML

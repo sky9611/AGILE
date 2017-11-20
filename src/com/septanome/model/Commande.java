@@ -32,13 +32,13 @@ public class Commande {
 	public List<Livraison> getListLivraison(){
 		return livraisons;
 	}
-<<<<<<< HEAD
+
 	public void addLivraison(Livraison l) {
 		this.livraisons.add(l);
-=======
+	}
+
 	
 	public void setLivraisons(List<Livraison> livraisons) {
 		this.livraisons = livraisons;
->>>>>>> 126bf821ca53c74ae4f2c356522ccdfefbf676b0
 	}
 }

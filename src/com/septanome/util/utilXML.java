@@ -184,4 +184,8 @@ public class utilXML {
 		return point;		
 	}
 	
+	public void writeTourneeToFile() {
+		
+	}
+	
 }

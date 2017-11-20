@@ -1,7 +1,6 @@
 package com.septanome.model;
 
 import java.util.*;
-import java.io.File;
 
 public class Plan {
 	private HashMap<Long,Point> pointsMap;

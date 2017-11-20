@@ -13,10 +13,19 @@ public class Point {
 	public int getCoordX() {
 		return coordX;
 	}
+	public void setCoordX(int coordX) {
+		this.coordX = coordX;
+	}
 	public int getCoordY() {
 		return coordY;
 	}
+	public void setCoordXX(int coordY) {
+		this.coordY = coordY;
+	}
 	public long getId() {
 		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
 	}
 }

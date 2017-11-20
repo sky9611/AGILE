@@ -16,6 +16,7 @@ import org.w3c.dom.NodeList;
 
 import com.septanome.model.Commande;
 import com.septanome.model.Livraison;
+import com.septanome.model.Plan;
 import com.septanome.model.Point;
 import com.septanome.model.Troncon;
 
@@ -25,7 +26,7 @@ import com.septanome.model.Troncon;
 
 public class utilXML {
 
-	/** @param(folder) Chemin d'accès au fichier XML */
+	/** @param folder Path to XML file */
 	public HashMap<Long, Point> loadPoint(String folder) {
 		Point point;
 		HashMap<Long, Point> points = new HashMap<Long, Point>(); 
@@ -56,7 +57,7 @@ public class utilXML {
 		    } 
 	}
 	
-	/** @param(folder) Chemin d'accès au fichier XML */
+	/** @param folder Path to XML file*/
 	public HashMap<Long, HashMap<Long, Troncon>> loadTroncon(String folder) {
 		Troncon troncon;
 		HashMap<Long, Troncon> h = new HashMap<Long, Troncon>(); 
@@ -90,7 +91,14 @@ public class utilXML {
 		    } 
 	}
 	
-	public Commande loadCommande(String folder, HashMap<Long, Point> hash) {
+	/** 
+	 * Load a command from an XML file
+	 * @param folder Path to XML file
+	 * @param hash list of existing points
+	 * @return Return a @Commande
+	 */
+	public Commande loadCommande(String folder, Plan plan) {
+		HashMap<Long, Point> hash = plan.getPointsMap();
 		Commande commande;
 		Livraison livraison;
 		List<Livraison> liste = new Vector<Livraison>();
@@ -156,6 +164,14 @@ public class utilXML {
 			return null;
 		  } 	
 		}
+	
+	/**
+	 * Find a point into the HashMap from coordinates
+	 * @param x X coordinate
+	 * @param y Y coordinate
+	 * @param hash List of existing @Point
+	 * @return @Point if it exists, null otherwise
+	 */
 	
 	public Point findPointbyCoords(int x, int y, HashMap<Long, Point> hash) {
 		Point point = null;

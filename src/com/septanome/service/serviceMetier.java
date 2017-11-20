@@ -36,14 +36,14 @@ public class serviceMetier {
 	 *Initialiser la commande a partir d'un ficher XML
 	 */
 	public void initCommande(String nomFicherDeCommande) {
-		
+		commande = myUtil.loadCommande(nomFicherDeCommande, plan);
 	}
 	
 	/**
 	 *Initialiser le plan avec que les points de livrson et les routes le plus court entre eux calcule par dijkstra 
 	 */
 	public void initPlanLivraison() {
-		//TODO
+		
 		
 	}
 	

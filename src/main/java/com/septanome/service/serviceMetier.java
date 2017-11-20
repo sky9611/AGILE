@@ -107,7 +107,7 @@ public class serviceMetier {
         		continue;
         	}
         	neighbourList.clear();
-    		for(Map.Entry<Long, Troncon> entry:tronconMap.get(d.index).entrySet()){
+    		for(Entry<Long, Troncon> entry:tronconMap.get(d.index).entrySet()){
     			neighbourList.add(entry.getKey());
     		}
         	for(long i:neighbourList) {
@@ -125,7 +125,7 @@ public class serviceMetier {
         HashMap<Long,HashMap<Long,Chemin>> cheminMap = new HashMap<Long,HashMap<Long,Chemin>>();
         HashMap<Long,Chemin> origineCheminMap = new HashMap<Long,Chemin>();
         List<Long> destinationList = new ArrayList<>();
-        for(Map.Entry<Long, Livraison> entry:livraisonsMap.entrySet()){
+        for(Entry<Long, Livraison> entry:livraisonsMap.entrySet()){
         	long key = entry.getKey();
         	if(key!=origineID)
         		destinationList.add(entry.getKey());

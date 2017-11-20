@@ -1,4 +1,4 @@
-package com.septanome.service;
+package main.java.com.septanome.service;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -9,9 +9,9 @@ import java.util.Map.Entry;
 import java.util.PriorityQueue;
 import java.util.List;
 
-import com.septanome.model.*;
-import com.septanome.util.*;
-import com.septanome.util.utilXML;
+import main.java.com.septanome.model.*;
+import main.java.com.septanome.util.*;
+import main.java.com.septanome.util.utilXML;
 public class serviceMetier {
 	public static int noPath = 9999;
 	private Plan plan;

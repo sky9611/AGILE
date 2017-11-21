@@ -3,13 +3,26 @@ package main.java.com.septanome.model;
 public class Livraison extends Point {
 	private int heureDeDebut;
 	private int heureDeFin;
+	private int duree;
 
-	public Livraison(long id, int coordX, int coordY, int heureDeDebut, int heureDeFin) {
+	public Livraison(long id, int coordX, int coordY, int duree, int heureDeDebut, int heureDeFin) {
 		super(id, coordX, coordY);
+		this.duree = duree;
 		this.heureDeDebut = heureDeDebut;
 		this.heureDeFin = heureDeFin;
 	}
 
+	public Livraison(long id, int coordX, int coordY, int duree) {
+		super(id, coordX, coordY);
+		this.duree = duree;
+		this.heureDeDebut = -1;
+		this.heureDeFin = -1;
+	}
+	
+	public int getDuree() {
+		return duree;
+	}
+	
 	public int getHeureDeDebut() {
 		return heureDeDebut;
 	}

@@ -16,7 +16,7 @@ public class MyTSP extends TemplateTSP{
 	@Override
 	protected Iterator<Integer> iterator(Integer sommetCrt, ArrayList<Integer> nonVus, int[][] cout, int[] duree) {
 		// TODO Auto-generated method stub
-		return null;
+		return nonVus.iterator();
 	}
 
 }

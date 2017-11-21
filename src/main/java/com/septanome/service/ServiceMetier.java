@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.List;
-import tsp.TemplateTSP;
 import main.java.com.septanome.model.*;
 import main.java.com.septanome.util.MyTSP;
 import main.java.com.septanome.util.UtilXML;
+import tsp.TSP1;
 
 public class ServiceMetier {
 	private final int noPath = 9999;
@@ -17,10 +17,10 @@ public class ServiceMetier {
 	private PlanLivraison planLivraison = new PlanLivraison();
 	private Commande commande = new Commande();
 	private Tournee tournee = new Tournee();
-	private int length; //nombre de points stocke dans n
 	private int nombreDeLivraison;
 	private UtilXML myUtil = new UtilXML();
-	private MyTSP tsp = new MyTSP();
+	//private MyTSP tsp = new MyTSP();
+	private TSP1 tsp = new TSP1();
 	private final double vitesse = 15000/3600;
 	/**
 	* Initialiser le plan total a partir d'un ficher XML
@@ -30,7 +30,7 @@ public class ServiceMetier {
 		//TODO
 		plan.setPointMap(myUtil.loadPoint(nomFicherDePlan));
 		plan.setTronconsMap(myUtil.loadTroncon(nomFicherDePlan));
-		length = plan.getPointsMap().size();
+		plan.getPointsMap().size();
 	}
 	
 	/**
@@ -46,7 +46,7 @@ public class ServiceMetier {
 	 */
 	public void initPlanLivraison() {
         //l'entrepot est considere comme un objet Livraison dont l'attribut heureDeDepart devient heureDeDebut et heureDeFin est 9999 par defaut
-        Livraison entrepot = new Livraison(commande.getEntrepot().getId(),commande.getEntrepot().getCoordX(),commande.getEntrepot().getCoordY(),commande.getHeureDeDepart(),9999);      
+        Livraison entrepot = new Livraison(commande.getEntrepot().getId(),commande.getEntrepot().getCoordX(),commande.getEntrepot().getCoordY(),0,commande.getHeureDeDepart(),9999);      
         
         HashMap<Long,Livraison> livraisonsMap = new HashMap<Long,Livraison>();
         livraisonsMap.put(entrepot.getId(), entrepot);
@@ -110,6 +110,13 @@ public class ServiceMetier {
         
         //System.out.println(distMap);	
         //System.out.println(plan.getTronconsMap());	
+        List<Long> destinationList = new ArrayList<>();
+        //System.out.println(livraisonsMap);
+        for(Map.Entry<Long, Livraison> entry:livraisonsMap.entrySet()){
+        	long key = entry.getKey();
+        	if(key!=origineID)
+        		destinationList.add(key);
+		}
         while(!queue.isEmpty()) {
         	dist d = queue.poll();
         	//System.out.println(d.index+" "+d.value);	
@@ -140,13 +147,7 @@ public class ServiceMetier {
         }
         HashMap<Long,HashMap<Long,Chemin>> cheminMap = new HashMap<Long,HashMap<Long,Chemin>>();
         HashMap<Long,Chemin> origineCheminMap = new HashMap<Long,Chemin>();
-        List<Long> destinationList = new ArrayList<>();
-        //System.out.println(livraisonsMap);
-        for(Map.Entry<Long, Livraison> entry:livraisonsMap.entrySet()){
-        	long key = entry.getKey();
-        	if(key!=origineID)
-        		destinationList.add(key);
-		}
+
         
 //        for(Map.Entry<Long, Long> entry:prev.entrySet()){
 //        	System.out.println(entry.getKey()+" "+entry.getValue());
@@ -165,7 +166,7 @@ public class ServiceMetier {
         	}
         	Collections.reverse(tronconList);
         	Chemin chemin = new Chemin(id,origineID,tronconList);
-        	//System.out.println(chemin);
+        	System.out.println(chemin);
         	origineCheminMap.put(id, chemin);
         }
         cheminMap.put(origineID, origineCheminMap); 
@@ -176,7 +177,7 @@ public class ServiceMetier {
 	 *Trouver le tournee final en utilisant le plan de livraison genere
 	 *@param b consider or not the time interval
 	 */
-	public void obtenirLeTournee(boolean b) {
+	public void calculerTournee(boolean b) {
 		if (b) {
 			
 		} else {
@@ -191,11 +192,14 @@ public class ServiceMetier {
 				long desID = 0;
 				if(i==0) {
 					startID = idEntrepot;
-					duree[(int) startID]=24*3600;
+					//duree[(int) startID]=24*3600;
+					duree[i] = 0;
 				} else {
 					startID = listLivraisons.get(i-1).getId();
-					duree[(int) startID]=(listLivraisons.get(i-1).getHeureDeFin()-listLivraisons.get(i-1).getHeureDeDebut())*3600;
+					//duree[(int) startID]=(listLivraisons.get(i-1).getHeureDeFin()-listLivraisons.get(i-1).getHeureDeDebut())*3600;
+					duree[i] = listLivraisons.get(i-1).getDuree();
 				}
+				
 				
 				for(int j=0;j<cheminsMap.size();j++) {
 					if(j==0) {
@@ -217,22 +221,32 @@ public class ServiceMetier {
 				for(int j=0;j<cheminsMap.size();j++) {
 					long startID = (i==0)?idEntrepot:listLivraisons.get(i-1).getId();
 					long desID = (j==0)?idEntrepot:listLivraisons.get(j-1).getId();
-					System.out.println("duree("+startID+","+desID+"): "+cout[i][j]);
+					System.out.println("cout("+startID+","+desID+"): "+cout[i][j]);
 						
 				}
 					
 			}
 			
-			
-			tsp.chercheSolution(tpsLimite, length, cout, duree);
+			tsp.chercheSolution(tpsLimite, cheminsMap.size(), cout, duree);
+			System.out.println(tsp.getMeilleureSolution(0));
+			System.out.println(tsp.getMeilleureSolution(1));
+			System.out.println(tsp.getMeilleureSolution(2));
 			List<Chemin> cheminList = new ArrayList<>();
 			for(int k=0;k<cheminsMap.size();k++) {
-				if (k!=cheminsMap.size()-1) {
-					Chemin chemin = cheminsMap.get(listLivraisons.get(tsp.getMeilleureSolution(k)).getId()).get(listLivraisons.get(tsp.getMeilleureSolution(k+1)).getId());
+				if(k==0) {
+					Chemin chemin = cheminsMap.get(idEntrepot).get(listLivraisons.get(tsp.getMeilleureSolution(k+1)-1).getId());
+					cheminList.add(chemin);
+				} else if (k<cheminsMap.size()-1) {
+					//System.out.println(listLivraisons.get(tsp.getMeilleureSolution(k)-1).getId());
+					//System.out.println(listLivraisons.get(tsp.getMeilleureSolution(k+1)-1).getId());
+					Chemin chemin = cheminsMap.get(listLivraisons.get(tsp.getMeilleureSolution(k)-1).getId()).get(listLivraisons.get(tsp.getMeilleureSolution(k+1)-1).getId());
+					cheminList.add(chemin);
 				} else {
-					Chemin chemin = cheminsMap.get(listLivraisons.get(tsp.getMeilleureSolution(k)).getId()).get(listLivraisons.get(tsp.getMeilleureSolution(0)).getId());
+					Chemin chemin = cheminsMap.get(listLivraisons.get(tsp.getMeilleureSolution(k)-1).getId()).get(idEntrepot);
+					cheminList.add(chemin);
 				}
 			}
+			//System.out.println(cheminList);
 //			int[] dureeOrigin = duree; 
 //			List<Chemin> cheminList = new ArrayList<>();
 //			myUtil.bubbleSort(duree);
@@ -256,7 +270,17 @@ public class ServiceMetier {
 //				}
 //			}
 			tournee.setChemins(cheminList);
+			//System.out.println(tournee.getChemins());
 		}
 
 	}	
+
+	/**
+	 * Get tournee
+	 */
+	public Tournee getTournee() {
+		System.out.println(tournee.getChemins());
+		return tournee;
+	}
 }
+

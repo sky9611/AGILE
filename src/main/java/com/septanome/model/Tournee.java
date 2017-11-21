@@ -1,5 +1,6 @@
 package main.java.com.septanome.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Tournee {
@@ -18,7 +19,16 @@ public class Tournee {
 	}
 	
 	public void setChemins(List<Chemin> cheminList) {
-		this.chemins = cheminList;		
+		chemins = new ArrayList<Chemin>(cheminList);	
 	}
 	
+	@Override
+	public String toString() {
+		String s ="";
+		for (Chemin chemin:chemins) {
+			s += chemin + "\r\n";
+		}
+		return s;
+		
+	}
 }

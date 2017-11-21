@@ -166,9 +166,10 @@ public class UtilXML {
 					Point p = findPointbyCoords(x,y, hash);
 					
 					if(p != null) {
+						int duree = Integer.parseInt(eElement.getAttribute("d"));
 						int hd = Integer.parseInt(eElement.getAttribute("hd"));
 						int hf = Integer.parseInt(eElement.getAttribute("hf"));
-						livraison = new Livraison(p.getId(), p.getCoordX(), p.getCoordY(), hd, hf);
+						livraison = new Livraison(p.getId(), p.getCoordX(), p.getCoordY(), duree, hd, hf);
 						System.out.println(livraison);
 						liste.add(livraison);
 					} else {

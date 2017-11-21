@@ -14,6 +14,8 @@ public class test {
 		sm.initPlan("D:\\documents\\INSA\\4IF\\PLD AGILE\\AGILE\\src\\test\\resources\\fichiersXML\\testPlan.xml");
 		sm.initCommande("D:\\documents\\INSA\\4IF\\PLD AGILE\\AGILE\\src\\test\\resources\\fichiersXML\\testLivraisons.xml");
 		sm.initPlanLivraison();
-		sm.obtenirLeTournee(false);
+		sm.calculerTournee(false);
+
+		System.out.println(sm.getTournee());
 	}
 }

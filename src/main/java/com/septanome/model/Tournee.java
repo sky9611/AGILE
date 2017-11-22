@@ -9,6 +9,10 @@ public class Tournee {
 		this.chemins = chemins;
 	}
 	
+	public Tournee() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public List<Chemin> getChemins(){
 		return chemins;
 	}

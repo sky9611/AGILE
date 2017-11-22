@@ -1,4 +1,4 @@
-package service;
+package test.java.service;
 
 import org.junit.Test;
 import main.java.com.septanome.service.ServiceMetier;

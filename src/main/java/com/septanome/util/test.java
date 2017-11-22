@@ -1,14 +1,5 @@
 package main.java.com.septanome.util;
 
-public class test {
-
-//package main.java.com.septanome.util;
-//
-//public class test {
-//	
-//}
-
-package main.java.com.septanome.util;
 
 import main.java.com.septanome.service.ServiceMetier;
 

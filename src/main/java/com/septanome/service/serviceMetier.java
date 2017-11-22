@@ -11,7 +11,7 @@ import main.java.com.septanome.util.MyTSP;
 import main.java.com.septanome.util.UtilXML;
 import tsp.TSP1;
 
-public class ServiceMetier {
+public class serviceMetier {
 	private final int noPath = 9999;
 	private Plan plan = new Plan();
 	private PlanLivraison planLivraison = new PlanLivraison();

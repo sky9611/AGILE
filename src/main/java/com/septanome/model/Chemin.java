@@ -40,5 +40,18 @@ public class Chemin {
 	public void setTroncons(List<Troncon> troncons) {
 		this.troncons = troncons;
 	}
+
+	public double getLongeur() {
+		return longeur;
+	}
+	
+	@Override
+	public String toString() {
+		String s = originePointID+"";
+		for(Troncon tr : troncons) {
+			s += "->"+tr.getDestinationID();
+		}
+		return s;
+	}
 	
 }

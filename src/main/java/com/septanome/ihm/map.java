@@ -9,8 +9,6 @@ import main.java.com.septanome.model.Point;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
-
-
 public class map extends JPanel {
  
   HashMap<Long,Point> p=new HashMap<Long,Point>();

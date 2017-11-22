@@ -13,6 +13,10 @@ public class Commande {
 		this.livraisons = livraisons;
 	}
 
+	public Commande() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getHeureDeDepart() {
 		return heureDeDepart;
 	}

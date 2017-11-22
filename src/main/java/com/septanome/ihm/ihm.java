@@ -1,4 +1,4 @@
-package main.java.com.septanome.ihm;
+/*package main.java.com.septanome.ihm;
 
 import javax.swing.*;
 
@@ -40,12 +40,20 @@ public class ihm extends JFrame implements ActionListener {
     map pan = new map(tab,road,tournee,dim.height); 
     pan.setLayout(new BorderLayout());
     
+<<<<<<< HEAD
     //création menu(side bar)
+=======
+    //crï¿½ation menu(side bar)
+>>>>>>> servicemetier
     JPanel menu=new JPanel();
     menu.setPreferredSize(new Dimension(dim.width-dim.height, dim.height));
     menu.setLayout(new BoxLayout(menu,BoxLayout.Y_AXIS));
     
+<<<<<<< HEAD
     //création panel de bouton
+=======
+    //crï¿½ation panel de bouton
+>>>>>>> servicemetier
     JPanel butPan=new JPanel();
     butPan.setLayout(new BoxLayout(butPan,BoxLayout.Y_AXIS));
     
@@ -134,7 +142,11 @@ public class ihm extends JFrame implements ActionListener {
     menu.setPreferredSize(new Dimension(dim.width-dim.height, dim.height));
     menu.setLayout(new BoxLayout(menu,BoxLayout.Y_AXIS));
     
+<<<<<<< HEAD
     //création panel de bouton
+=======
+    //crï¿½ation panel de bouton
+>>>>>>> servicemetier
     JPanel butPan=new JPanel();
     butPan.setLayout(new BoxLayout(butPan,BoxLayout.Y_AXIS));
     
@@ -200,4 +212,4 @@ public class ihm extends JFrame implements ActionListener {
 public static void main(String[] args){
     ihm fenetre = new ihm();
   }       
-}  
+}  */

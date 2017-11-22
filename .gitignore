@@ -89,3 +89,5 @@ gradle-app.setting
 .idea
 *.class
 bin
+#dont ignore TSP.jar
+!lib/TSP.jar

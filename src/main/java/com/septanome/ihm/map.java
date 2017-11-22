@@ -1,4 +1,4 @@
-package com.septanome.ihm;
+/*package com.septanome.ihm;
 
 import javax.swing.JPanel;
 
@@ -70,4 +70,4 @@ public class map extends JPanel {
 		}
 	   }
   }               
-}
+}*/

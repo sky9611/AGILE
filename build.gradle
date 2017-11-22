@@ -3,28 +3,18 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
-<<<<<<< HEAD
-=======
 apply plugin: 'idea'
->>>>>>> servicemetier
 
 sourceCompatibility = 1.8
 
 repositories {
-<<<<<<< HEAD
-=======
 	flatDir{
 		dirs 'lib'
 	}
-
->>>>>>> servicemetier
     mavenCentral()
 }
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-<<<<<<< HEAD
-=======
     compile name: 'TSP'
->>>>>>> servicemetier
 }

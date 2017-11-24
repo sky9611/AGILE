@@ -1,5 +1,5 @@
 
-/*package test.java.model;
+package test.java.model;
 
 import main.java.com.septanome.model.Point;
 import org.junit.Test;
@@ -14,4 +14,4 @@ public class PointTest {
         assertEquals(pointUnderTest.getCoordY(),1);
         assertEquals(pointUnderTest.getId(),1);
     }
-}*/
+}

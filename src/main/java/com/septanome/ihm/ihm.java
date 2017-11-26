@@ -5,6 +5,8 @@ import javax.swing.*;
 import main.java.com.septanome.model.Commande;
 import main.java.com.septanome.model.Troncon;
 import main.java.com.septanome.model.Point;
+import main.java.com.septanome.model.Tournee;
+import main.java.com.septanome.service.ServiceMetier;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -16,15 +18,15 @@ public class ihm extends JFrame implements ActionListener {
 	
 	
 	JButton valider=new JButton("valider");
-	JButton b1=new JButton("          action 1            ");
-	JButton b2=new JButton("          action 2            ");
-    JButton b3=new JButton("          action 3            ");
-    JButton b1o=new JButton("          action 4            ");
-    JButton b2o=new JButton("          action 5            ");
-    JButton b3o=new JButton("          action 6            ");
+	JButton b1     =new JButton("          action 1            ");
+	JButton b2     =new JButton("          action 2            ");
+    JButton b3     =new JButton("          action 3            ");
+    JButton b1o    =new JButton("          action 4            ");
+    JButton b2o    =new JButton("          action 5            ");
+    JButton b3o    =new JButton("          action 6            ");
     JTextField loadPlan=new JTextField("entrez le chemin");
     
-  public ihm(HashMap<Long,Point> tab,HashMap<Long,HashMap<Long,Troncon>> road,Commande tournee){             
+  public ihm(HashMap<Long,Point> tab,HashMap<Long,HashMap<Long,Troncon>> road,Commande tournee) {             
     super("Fullscreen");
     this.setTitle("Map");
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,10 +71,7 @@ public class ihm extends JFrame implements ActionListener {
 
     
     tourTitle.add(j);
-    for(int i=0;i<tournee.getListLivraison().size();i++){
-		//JLabel l=new JLabel(Integer.toString(tournee.getListLivraison().get(i).toString()));
-		//tour.add(l);
-	}
+   
     
  
     b1.addActionListener(this);
@@ -90,13 +89,13 @@ public class ihm extends JFrame implements ActionListener {
       but1.add(b1);
       but1.add(Box.createRigidArea(new Dimension(30,0)));
       but1.add(b2);
-       but1.add(Box.createRigidArea(new Dimension(30,0)));
+      but1.add(Box.createRigidArea(new Dimension(30,0)));
       but1.add(b3);
           
       but2.add(b1o);
       but2.add(Box.createRigidArea(new Dimension(30,0)));
       but2.add(b2o);
-       but2.add(Box.createRigidArea(new Dimension(30,0)));
+      but2.add(Box.createRigidArea(new Dimension(30,0)));
       but2.add(b3o);  
       
       butPan.add(Box.createRigidArea(new Dimension(0,20)));
@@ -121,6 +120,7 @@ public class ihm extends JFrame implements ActionListener {
   }
   public ihm(){
 	      super("Fullscreen");
+	      
     this.setTitle("Map");
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     Toolkit toolkit =  Toolkit.getDefaultToolkit ();
@@ -164,13 +164,13 @@ public class ihm extends JFrame implements ActionListener {
       but1.add(b1);
       but1.add(Box.createRigidArea(new Dimension(30,0)));
       but1.add(b2);
-       but1.add(Box.createRigidArea(new Dimension(30,0)));
+      but1.add(Box.createRigidArea(new Dimension(30,0)));
       but1.add(b3);
           
       but2.add(b1o);
       but2.add(Box.createRigidArea(new Dimension(30,0)));
       but2.add(b2o);
-       but2.add(Box.createRigidArea(new Dimension(30,0)));
+      but2.add(Box.createRigidArea(new Dimension(30,0)));
       but2.add(b3o);  
       
       butPan.add(Box.createRigidArea(new Dimension(0,20)));
@@ -192,7 +192,16 @@ public class ihm extends JFrame implements ActionListener {
 	  }
      public void actionPerformed(ActionEvent arg0){
 		   if(arg0.getSource() == valider){
-    ihm fenetre = new ihm();
+			   
+			   String query=loadPlan.getText();
+			   ServiceMetier m=new ServiceMetier();
+			   m.initPlan(query);
+			   			  
+				m.initCommande("C:\\Users\\JossTheBoss\\git\\agile4\\AGILE\\src\\test\\resources\\fichiersXML\\testLivraisons.xml");
+				m.initPlanLivraison();
+				m.calculerTournee(false);
+
+    ihm fenetre = new ihm(m.plan.pointsMap,m.plan.tronconsMap,m.commande);
 			}
 			
      } 

@@ -5,6 +5,8 @@ public class Troncon {
 	private double longeur;
 	private String nom;
 	private long origineID;
+	
+	
 	public long getDestinationID() {
 		return destinationID;
 	}

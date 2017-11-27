@@ -1,6 +1,6 @@
-package test.java.model;
+package modelTests;
 
-import main.java.com.septanome.model.Troncon;
+import com.septanome.model.Troncon;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

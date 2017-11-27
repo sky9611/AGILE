@@ -40,12 +40,12 @@ public class ihm extends JFrame implements ActionListener {
     map pan = new map(tab,road,tournee,dim.height); 
     pan.setLayout(new BorderLayout());
     
-    //création menu(side bar)
+    //creation menu(side bar)
     JPanel menu=new JPanel();
     menu.setPreferredSize(new Dimension(dim.width-dim.height, dim.height));
     menu.setLayout(new BoxLayout(menu,BoxLayout.Y_AXIS));
     
-    //création panel de bouton
+    //creation panel de bouton
     JPanel butPan=new JPanel();
     butPan.setLayout(new BoxLayout(butPan,BoxLayout.Y_AXIS));
     
@@ -134,7 +134,7 @@ public class ihm extends JFrame implements ActionListener {
     menu.setPreferredSize(new Dimension(dim.width-dim.height, dim.height));
     menu.setLayout(new BoxLayout(menu,BoxLayout.Y_AXIS));
     
-    //création panel de bouton
+    //crï¿½ation panel de bouton
     JPanel butPan=new JPanel();
     butPan.setLayout(new BoxLayout(butPan,BoxLayout.Y_AXIS));
     

@@ -150,10 +150,10 @@ public class UtilXML {
 				return null;
 			}
 			
-			if(heure < 0 || heure > 24) {
-				System.out.println("Hour format incorrect");
-				return null;
-			}
+//			if(heure < 0 || heure > 24) {
+//				System.out.println("Hour format incorrect");
+//				return null;
+//			}
 			
 			nList = doc.getElementsByTagName("Livraison");
 			for (int temp = 0; temp < nList.getLength(); temp++) {
@@ -269,9 +269,6 @@ public class UtilXML {
 			}
 		}
 		return -1;
-	}   
-	
-	
-	
-	
+	}
 }
+

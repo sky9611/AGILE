@@ -15,7 +15,7 @@ public class test {
 		sm.initCommande("./src/test/resources/fichiersXML/testLivraisons.xml");
 		sm.initPlanLivraison();
 		sm.calculerTournee(false);
-
+		System.out.println("Test output:");
 		System.out.println(sm.getTournee());
 	}
 }

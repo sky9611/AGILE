@@ -1,5 +1,6 @@
 package main.java.com.septanome.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -7,15 +8,15 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.List;
 import main.java.com.septanome.model.*;
-import main.java.com.septanome.util.MyTSP;
+import main.java.com.septanome.util.TSPTW;;
 import main.java.com.septanome.util.UtilXML;
 import tsp.TSP1;
 
 public class ServiceMetier {
 	private final int noPath = 9999;
-	private Plan plan = new Plan();
+	public Plan plan = new Plan();
 	private PlanLivraison planLivraison = new PlanLivraison();
-	private Commande commande = new Commande();
+	public Commande commande = new Commande();
 	private Tournee tournee = new Tournee();
 	private int nombreDeLivraison;
 	private UtilXML myUtil = new UtilXML();
@@ -34,7 +35,7 @@ public class ServiceMetier {
 	}
 	
 	/**
-	 *Initialiser la commande a partir d'un ficher XML
+	 *Initialiser la commande(demande de livraisons) a partir d'un ficher XML
 	 */
 	public void initCommande(String nomFicherDeCommande) {
 		commande = myUtil.loadCommande(nomFicherDeCommande, plan);
@@ -177,9 +178,10 @@ public class ServiceMetier {
 	 *Trouver le tournee final en utilisant le plan de livraison genere
 	 *@param b consider or not the time interval
 	 */
-	public void calculerTournee(boolean b) {
+	public void calculerTournee(boolean b) throws ClassNotFoundException, IOException{
 		if (b) {
-			
+			TSPTW tsptw = new TSPTW(planLivraison, commande);
+			tournee = (tsptw.findSolution(10));
 		} else {
 			int tpsLimite = 1000;
 			HashMap<Long,HashMap<Long,Chemin>> cheminsMap = planLivraison.getCheminsMap();
@@ -270,7 +272,7 @@ public class ServiceMetier {
 //				}
 //			}
 			tournee.setChemins(cheminList);
-			//System.out.println(tournee.getChemins());
+			System.out.println(tournee.getChemins());
 		}
 
 	}	

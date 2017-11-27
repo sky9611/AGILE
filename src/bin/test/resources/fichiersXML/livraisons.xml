@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Livraisons>
+<Entrepot x="16034" y="27050" h="10"/>
+<Livraison x="13346" y="19842" d="400" hd="14" hf="15"/>
+<Livraison x="16296" y="21924" d="600" hd="10" hf="11"/>
+<Livraison x="21541" y="27433" d="180" hd="11" hf="12"/> 
+</Livraisons>

@@ -1,4 +1,4 @@
-package testsModel;
+package modelTests;
 
 import com.septanome.model.Chemin;
 import com.septanome.model.Troncon;

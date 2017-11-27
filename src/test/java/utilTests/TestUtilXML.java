@@ -1,7 +1,7 @@
-package util;
+package utilTests;
 
-import main.java.com.septanome.model.Point;
-import main.java.com.septanome.util.UtilXML;
+import com.septanome.model.Point;
+import com.septanome.util.UtilXML;
 import org.junit.Test;
 
 import java.util.HashMap;

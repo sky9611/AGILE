@@ -1,7 +1,7 @@
 
-package test.java.model;
+package modelTests;
 
-import main.java.com.septanome.model.Point;
+import com.septanome.model.Point;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

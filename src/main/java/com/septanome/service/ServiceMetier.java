@@ -1,4 +1,4 @@
-package main.java.com.septanome.service;
+package com.septanome.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.List;
-import main.java.com.septanome.model.*;
-import main.java.com.septanome.util.TSPTW;;
-import main.java.com.septanome.util.UtilXML;
+import com.septanome.model.*;
+import com.septanome.util.TSPTW;;
+import com.septanome.util.UtilXML;
 import tsp.TSP1;
 
 public class ServiceMetier {

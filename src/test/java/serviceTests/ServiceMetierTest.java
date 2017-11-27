@@ -1,10 +1,12 @@
-package test.java.service;
+package serviceTests;
 
 import org.junit.Test;
-import main.java.com.septanome.service.ServiceMetier;
+import com.septanome.service.ServiceMetier;
+
+import java.io.IOException;
 
 public class ServiceMetierTest {
-    @Test public void test(){
+    @Test public void test() throws IOException, ClassNotFoundException {
         ServiceMetier sm = new ServiceMetier();
         sm.initPlan("./src/test/resources/fichiersXML/testPlan.xml");
         sm.initCommande("./src/test/resources/fichiersXML/testLivraisons.xml");

@@ -1,10 +1,10 @@
-package main.java.com.septanome.ihm;
+package com.septanome.ihm;
 
 import javax.swing.*;
 
-import main.java.com.septanome.model.Commande;
-import main.java.com.septanome.model.Troncon;
-import main.java.com.septanome.model.Point;
+import com.septanome.model.Commande;
+import com.septanome.model.Troncon;
+import com.septanome.model.Point;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -40,12 +40,12 @@ public class ihm extends JFrame implements ActionListener {
     map pan = new map(tab,road,tournee,dim.height); 
     pan.setLayout(new BorderLayout());
     
-    //création menu(side bar)
+    //creation menu(side bar)
     JPanel menu=new JPanel();
     menu.setPreferredSize(new Dimension(dim.width-dim.height, dim.height));
     menu.setLayout(new BoxLayout(menu,BoxLayout.Y_AXIS));
     
-    //création panel de bouton
+    //creation panel de bouton
     JPanel butPan=new JPanel();
     butPan.setLayout(new BoxLayout(butPan,BoxLayout.Y_AXIS));
     
@@ -134,7 +134,7 @@ public class ihm extends JFrame implements ActionListener {
     menu.setPreferredSize(new Dimension(dim.width-dim.height, dim.height));
     menu.setLayout(new BoxLayout(menu,BoxLayout.Y_AXIS));
     
-    //création panel de bouton
+    //crï¿½ation panel de bouton
     JPanel butPan=new JPanel();
     butPan.setLayout(new BoxLayout(butPan,BoxLayout.Y_AXIS));
     

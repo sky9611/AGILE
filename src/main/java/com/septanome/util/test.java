@@ -4,9 +4,9 @@
 //	
 //}
 
-package main.java.com.septanome.util;
+package com.septanome.util;
 
-import main.java.com.septanome.service.ServiceMetier;
+import com.septanome.service.ServiceMetier;
 
 import java.io.IOException;
 

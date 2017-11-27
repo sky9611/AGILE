@@ -1,10 +1,10 @@
-package main.java.com.septanome.ihm;
+package com.septanome.ihm;
 
 import javax.swing.*;
 
-import main.java.com.septanome.model.Commande;
-import main.java.com.septanome.model.Troncon;
-import main.java.com.septanome.model.Point;
+import com.septanome.model.Commande;
+import com.septanome.model.Troncon;
+import com.septanome.model.Point;
 
 import java.awt.*;
 import java.awt.event.*;

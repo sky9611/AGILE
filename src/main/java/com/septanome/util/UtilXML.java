@@ -1,4 +1,4 @@
-package main.java.com.septanome.util;
+package com.septanome.util;
 
 import java.io.File;
 import java.io.StringWriter;
@@ -22,11 +22,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import main.java.com.septanome.model.Commande;
-import main.java.com.septanome.model.Livraison;
-import main.java.com.septanome.model.Plan;
-import main.java.com.septanome.model.Point;
-import main.java.com.septanome.model.Troncon;
+import com.septanome.model.Commande;
+import com.septanome.model.Livraison;
+import com.septanome.model.Plan;
+import com.septanome.model.Point;
+import com.septanome.model.Troncon;
 
 /**
  * Some tools to load XML files or create an XML file

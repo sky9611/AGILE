@@ -1,4 +1,4 @@
-package main.java.com.septanome.util;
+package com.septanome.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -11,11 +11,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import main.java.com.septanome.model.Commande;
-import main.java.com.septanome.model.Livraison;
-import main.java.com.septanome.model.Chemin;
-import main.java.com.septanome.model.PlanLivraison;
-import main.java.com.septanome.model.Tournee;
+import com.septanome.model.Commande;
+import com.septanome.model.Livraison;
+import com.septanome.model.Chemin;
+import com.septanome.model.PlanLivraison;
+import com.septanome.model.Tournee;
 
 public class TSPTW {
 	private PlanLivraison planLivraison = new PlanLivraison();

@@ -1,4 +1,4 @@
-package main.java.com.septanome.ihm;
+package com.septanome.ihm;
 
 public class test {
 

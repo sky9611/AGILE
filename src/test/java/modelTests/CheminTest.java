@@ -26,9 +26,17 @@ public class CheminTest {
      * The creation of a Chemin that detination and destination don't match the troncon list
      * destination and origin should fail.
      */
-    @Test(expected = Exception.class) public void testCheminIntegrity(){
+    @Test public void testCheminIntegrity(){
         Troncon t1 = new Troncon(2,1.4,"Allée L'OM",1);
         List<Troncon> troncons = Arrays.asList(t1);
-        Chemin cheminUnderTest = new Chemin(5,4,troncons);
+        try {
+            Chemin cheminUnderTest = new Chemin(5, 4, troncons);
+        }catch(Exception e){
+            return;
+        }
+        assertTrue("The creation of a Chemin that detination and origin don't match the troncon list" +
+                "destination and origin should fail.",false);
     }
+
+
 }

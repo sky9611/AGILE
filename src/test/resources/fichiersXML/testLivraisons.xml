@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Livraisons>
-<Entrepot x="15427" y="27866" h="10"/>
-<Livraison x="15602" y="27911" d="40" hd="14" hf="15"/>
-<Livraison x="16034" y="27050" d="60" hd="10" hf="11"/>
+<Entrepot x="15427" y="27866" h="3600"/>
+<Livraison x="15602" y="27911" d="2400" hd="3600" hf="64800"/>
+<Livraison x="16034" y="27050" d="2400" hd="3600" hf="64800"/>
 </Livraisons>

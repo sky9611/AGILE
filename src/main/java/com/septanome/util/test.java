@@ -1,6 +1,5 @@
 package main.java.com.septanome.util;
 
-
 import main.java.com.septanome.service.ServiceMetier;
 
 public class test {

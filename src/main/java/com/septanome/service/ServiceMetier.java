@@ -5,9 +5,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
+
+import com.sola.util.TSPTW;
+
 import java.util.List;
 import main.java.com.septanome.model.*;
-import main.java.com.septanome.util.MyTSP;
+import main.java.com.septanome.util.TSPTW;;
 import main.java.com.septanome.util.UtilXML;
 import tsp.TSP1;
 
@@ -179,7 +182,8 @@ public class ServiceMetier {
 	 */
 	public void calculerTournee(boolean b) {
 		if (b) {
-			
+			TSPTW tsptw = new TSPTW(planLivraison, commande);
+			tournee = (tsptw.findSolution(10));
 		} else {
 			int tpsLimite = 1000;
 			HashMap<Long,HashMap<Long,Chemin>> cheminsMap = planLivraison.getCheminsMap();

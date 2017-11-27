@@ -37,6 +37,21 @@ public class CheminTest {
         assertTrue("The creation of a Chemin that detination and origin don't match the troncon list" +
                 "destination and origin should fail.",false);
     }
+    /**
+     * The troncons should be connected
+     */
+    @Test public void testCheminContinuity(){
+        Troncon t1 = new Troncon(2,0.5,"Rue de la liberte",1);
+        Troncon t2 = new Troncon(3,0.3,"Rue Pierre Baratin",2);
+        Troncon t3 = new Troncon(5,0.3,"Rue Pierre Baratin",4);
+        List<Troncon> troncons = Arrays.asList(t1,t2,t3);
+        try {
+            Chemin cheminUnderTest = new Chemin(t2.getDestinationID(), t1.getOrigineID(), troncons);
+        }catch(Exception e){
+            return;
+        }
+        assertTrue("The troncon list should contain connected troncons",false);
 
+    }
 
 }

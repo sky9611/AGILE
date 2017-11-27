@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/AGILE.iml" filepath="$PROJECT_DIR$/.idea/AGILE.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/itineraires.iml" filepath="$PROJECT_DIR$/.idea/modules/itineraires.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/itineraires_main.iml" filepath="$PROJECT_DIR$/.idea/modules/itineraires_main.iml" group="itineraires" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/itineraires_test.iml" filepath="$PROJECT_DIR$/.idea/modules/itineraires_test.iml" group="itineraires" />
     </modules>
   </component>
 </project>

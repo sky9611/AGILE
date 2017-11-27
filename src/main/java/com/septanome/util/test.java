@@ -8,8 +8,10 @@ package main.java.com.septanome.util;
 
 import main.java.com.septanome.service.ServiceMetier;
 
+import java.io.IOException;
+
 public class test {
-	public static void main(String[] argc) {
+	public static void main(String[] argc) throws IOException, ClassNotFoundException {
 		ServiceMetier sm = new ServiceMetier();
 		sm.initPlan("./src/test/resources/fichiersXML/testPlan.xml");
 		sm.initCommande("./src/test/resources/fichiersXML/testLivraisons.xml");

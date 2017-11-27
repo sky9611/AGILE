@@ -190,7 +190,11 @@ public class TSPTW {
 			long idDes = l.get(i);
 			//System.out.println(idStart+" "+idDes);
 			double longeur = planLivraison.getCheminsMap().get(idStart).get(idDes).getLongeur();
-			arrivalTimes[i] = arrivalTimes[i-1] + duree + longeur/vitesse;
+			if (arrivalTimes[i-1]>livraisonsMap.get(idStart).getHeureDeDebut()) {
+				arrivalTimes[i] = arrivalTimes[i-1] + duree + longeur/vitesse;
+			} else {
+				arrivalTimes[i] = livraisonsMap.get(idStart).getHeureDeDebut();
+			}
 		}
 		return arrivalTimes;
 	}

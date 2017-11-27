@@ -3,8 +3,8 @@ package main.java.com.septanome.model;
 import java.util.*;
 
 public class Plan {
-	public HashMap<Long,Point> pointsMap;
-	public HashMap<Long,HashMap<Long,Troncon>> tronconsMap;
+	private HashMap<Long,Point> pointsMap;
+	private HashMap<Long,HashMap<Long,Troncon>> tronconsMap;
 	
 	
 	//1ere Long est le debut, 2eme Long est la fin
@@ -34,5 +34,4 @@ public class Plan {
 	public void setTronconsMap(HashMap<Long,HashMap<Long,Troncon>> tronconsMap) {
 		this.tronconsMap = tronconsMap;
 	}
-
 }

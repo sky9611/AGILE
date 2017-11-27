@@ -1,13 +1,11 @@
 package main.java.com.septanome.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
-
-import com.sola.util.TSPTW;
-
 import java.util.List;
 import main.java.com.septanome.model.*;
 import main.java.com.septanome.util.TSPTW;;
@@ -180,7 +178,7 @@ public class ServiceMetier {
 	 *Trouver le tournee final en utilisant le plan de livraison genere
 	 *@param b consider or not the time interval
 	 */
-	public void calculerTournee(boolean b) {
+	public void calculerTournee(boolean b) throws ClassNotFoundException, IOException{
 		if (b) {
 			TSPTW tsptw = new TSPTW(planLivraison, commande);
 			tournee = (tsptw.findSolution(10));

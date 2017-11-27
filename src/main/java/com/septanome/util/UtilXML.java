@@ -66,7 +66,7 @@ public class UtilXML {
 	}
 	
 	/** @param folder Path to XML file*/
-	public HashMap<Long, HashMap<Long, Troncon>> loadTroncon(String folder) {
+	public static HashMap<Long, HashMap<Long, Troncon>> loadTroncon(String folder) {
 		Troncon troncon;
 		
 		HashMap<Long, HashMap<Long, Troncon>> troncons = new HashMap<Long, HashMap<Long, Troncon>>();
@@ -170,7 +170,7 @@ public class UtilXML {
 						int hd = Integer.parseInt(eElement.getAttribute("hd"));
 						int hf = Integer.parseInt(eElement.getAttribute("hf"));
 						livraison = new Livraison(p.getId(), p.getCoordX(), p.getCoordY(), duree, hd, hf);
-						System.out.println(livraison);
+						//System.out.println(livraison);
 						liste.add(livraison);
 					} else {
 						System.out.println("Ce noeud n'existe pas : " + x + " " + y);
@@ -270,7 +270,9 @@ public class UtilXML {
 		}
 		return -1;
 	}   
-	
+	public static void main(String[] argc) {
+		System.out.println(loadTroncon("C:\\Users\\JossTheBoss\\git\\agile4\\AGILE\\src\\test\\resources\\fichiersXML\\testPlan.xml").toString());;
+	}
 	
 	
 	

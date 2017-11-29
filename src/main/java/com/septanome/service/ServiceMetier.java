@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.List;
+
+import com.septanome.exception.BadLinkException;
 import com.septanome.model.*;
 import com.septanome.util.TSPTW;;
 import com.septanome.util.UtilXML;
@@ -71,7 +73,7 @@ public class ServiceMetier {
 	/**
 	 *Chercher dans le Plan total la longueur de chemin plus courte de livraison origine vers destination
 	 */ 
-	public HashMap<Long,HashMap<Long,Chemin>> calcLePlusCourtChemin(long origineID) {
+	public HashMap<Long,HashMap<Long,Chemin>> calcLePlusCourtChemin(long origineID) throws BadLinkException {
 		//Chemin chemin = new Chemin();
 		//System.out.println("origineID="+origineID);
 		class dist implements Comparable<dist> {

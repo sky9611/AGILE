@@ -47,7 +47,7 @@ public class ServiceMetier {
 	/**
 	 *Initialiser le plan avec que les points de livraison et les routes les plus courts entre eux calcules par dijkstra 
 	 */
-	public void initPlanLivraison() {
+	public void initPlanLivraison() throws BadLinkException {
         //l'entrepot est considere comme un objet Livraison dont l'attribut heureDeDepart devient heureDeDebut et heureDeFin est 9999 par defaut
         Livraison entrepot = new Livraison(commande.getEntrepot().getId(),commande.getEntrepot().getCoordX(),commande.getEntrepot().getCoordY(),0,commande.getHeureDeDepart(),9999);      
         

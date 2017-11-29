@@ -272,6 +272,7 @@ public class ServiceMetier {
 //				}
 //			}
 			tournee.setChemins(cheminList);
+			//TODO remove System.out.println
 			System.out.println(tournee.getChemins());
 		}
 
@@ -281,6 +282,7 @@ public class ServiceMetier {
 	 * Get tournee
 	 */
 	public Tournee getTournee() {
+		//TODO remove System.out.println
 		System.out.println(tournee.getChemins());
 		return tournee;
 	}

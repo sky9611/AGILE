@@ -7,12 +7,13 @@
 package com.septanome.util;
 
 import com.septanome.exception.BadLinkException;
+import com.septanome.exception.ConstructorException;
 import com.septanome.service.ServiceMetier;
 
 import java.io.IOException;
 
 public class test {
-	public static void main(String[] argc) throws IOException, ClassNotFoundException, BadLinkException {
+	public static void main(String[] argc) throws IOException, ClassNotFoundException, ConstructorException {
 		ServiceMetier sm = new ServiceMetier();
 		sm.initPlan("./src/test/resources/fichiersXML/planLyonGrand.xml");
 		sm.initCommande("./src/test/resources/fichiersXML/DLGrand10.xml");

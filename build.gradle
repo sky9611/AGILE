@@ -7,7 +7,7 @@ apply plugin: 'idea'
 apply plugin: 'application'
 
 sourceCompatibility = 1.8
-mainClassName ="com.septanome.util.test"
+mainClassName ="com.septanome.test.Test"
 
 repositories {
 	flatDir{

@@ -9,6 +9,7 @@ import java.util.PriorityQueue;
 import java.util.List;
 
 import com.septanome.exception.BadLinkException;
+import com.septanome.exception.ConstructorException;
 import com.septanome.model.*;
 import com.septanome.util.TSPTW;;
 import com.septanome.util.UtilXML;
@@ -47,7 +48,7 @@ public class ServiceMetier {
 	/**
 	 *Initialiser le plan avec que les points de livraison et les routes les plus courts entre eux calcules par dijkstra 
 	 */
-	public void initPlanLivraison() throws BadLinkException {
+	public void initPlanLivraison() throws ConstructorException {
         //l'entrepot est considere comme un objet Livraison dont l'attribut heureDeDepart devient heureDeDebut et heureDeFin est 9999 par defaut
         Livraison entrepot = new Livraison(commande.getEntrepot().getId(),commande.getEntrepot().getCoordX(),commande.getEntrepot().getCoordY(),0,commande.getHeureDeDepart(),9999);      
         
@@ -73,7 +74,7 @@ public class ServiceMetier {
 	/**
 	 *Chercher dans le Plan total la longueur de chemin plus courte de livraison origine vers destination
 	 */ 
-	public HashMap<Long,HashMap<Long,Chemin>> calcLePlusCourtChemin(long origineID) throws BadLinkException {
+	public HashMap<Long,HashMap<Long,Chemin>> calcLePlusCourtChemin(long origineID) throws ConstructorException{
 		//Chemin chemin = new Chemin();
 		//System.out.println("origineID="+origineID);
 		class dist implements Comparable<dist> {
@@ -168,8 +169,9 @@ public class ServiceMetier {
         		tempDes = tempSta;
         	}
         	Collections.reverse(tronconList);
-        	Chemin chemin = new Chemin(id,origineID,tronconList);
-        	System.out.println(chemin);
+			Chemin chemin = null;
+			chemin = new Chemin(id,origineID,tronconList);
+			System.out.println(chemin);
         	origineCheminMap.put(id, chemin);
         }
         cheminMap.put(origineID, origineCheminMap); 

@@ -1,5 +1,7 @@
 package com.septanome.service;
 
+import com.septanome.exception.BadLinkException;
+import com.septanome.exception.EmptyListException;
 import com.septanome.model.*;
 import com.septanome.util.GATSPTW;
 import com.septanome.util.TSPTW;
@@ -30,7 +32,7 @@ public class ServiceMetier {
     private TSP1 tsp = new TSP1();
     private static final double vitesse = 60000 / 3600;
 
-    public void init(String nomFicherDePlan, String nomFicherDeCommande) {
+    public void init(String nomFicherDePlan, String nomFicherDeCommande) throws BadLinkException, EmptyListException {
         initPlan(nomFicherDePlan);
         initCommande(nomFicherDeCommande);
         initPlanLivraison();
@@ -58,7 +60,7 @@ public class ServiceMetier {
     /**
      * Initialiser le plan avec que les points de livraison et les routes les plus courts entre eux calcules par dijkstra
      */
-    public void initPlanLivraison() {
+    public void initPlanLivraison() throws BadLinkException, EmptyListException {
         //l'entrepot est considere comme un objet Livraison dont l'attribut heureDeDepart devient heureDeDebut et heureDeFin est 9999 par defaut
         Livraison entrepot = new Livraison(commande.getEntrepot().getId(), commande.getEntrepot().getCoordX(), commande.getEntrepot().getCoordY(), 0, commande.getHeureDeDepart(), 9999);
 
@@ -88,7 +90,7 @@ public class ServiceMetier {
     /**
      * Chercher dans le Plan total la longueur de chemin plus courte de livraison origine vers destination
      */
-    private HashMap<Long, HashMap<Long, Chemin>> calcLePlusCourtChemin(long origineID) {
+    private HashMap<Long, HashMap<Long, Chemin>> calcLePlusCourtChemin(long origineID) throws BadLinkException, EmptyListException {
         //Chemin chemin = new Chemin();
         //System.out.println("origineID="+origineID);
         class dist implements Comparable<dist> {

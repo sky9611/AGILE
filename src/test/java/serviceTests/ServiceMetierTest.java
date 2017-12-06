@@ -17,7 +17,7 @@ public class ServiceMetierTest {
     @Test public void testGetTournee() throws ConstructorException {
         ServiceMetier sm = new ServiceMetier();
         sm.initPlan("./src/test/resources/fichiersXML/planLyonGrand.xml");
-        sm.initCommande("./src/test/resources/fichiersXML/DLGrand10.xml");
+        sm.initCommande("./src/test/resources/fichiersXML/DLgrand10.xml");
         sm.initPlanLivraison();
         try {
             sm.calculerTournee(false);

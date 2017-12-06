@@ -1,17 +1,14 @@
 package com.septanome.service;
 
-import com.septanome.exception.BadLinkException;
-import com.septanome.exception.EmptyListException;
 import com.septanome.model.*;
 import com.septanome.util.GATSPTW;
-import com.septanome.util.TSPTW;
 import com.septanome.util.UtilXML;
 import tsp.TSP1;
 
 import java.io.IOException;
 import java.util.*;
 
-public class ServiceMetier {
+public class ServiceMetier implements Cloneable{
 
     public Commande getCommande() {
         return commande;
@@ -32,7 +29,7 @@ public class ServiceMetier {
     private TSP1 tsp = new TSP1();
     private static final double vitesse = 60000 / 3600;
 
-    public void init(String nomFicherDePlan, String nomFicherDeCommande) throws BadLinkException, EmptyListException {
+    public void init(String nomFicherDePlan, String nomFicherDeCommande) {
         initPlan(nomFicherDePlan);
         initCommande(nomFicherDeCommande);
         initPlanLivraison();
@@ -60,7 +57,7 @@ public class ServiceMetier {
     /**
      * Initialiser le plan avec que les points de livraison et les routes les plus courts entre eux calcules par dijkstra
      */
-    public void initPlanLivraison() throws BadLinkException, EmptyListException {
+    public void initPlanLivraison() {
         //l'entrepot est considere comme un objet Livraison dont l'attribut heureDeDepart devient heureDeDebut et heureDeFin est 9999 par defaut
         Livraison entrepot = new Livraison(commande.getEntrepot().getId(), commande.getEntrepot().getCoordX(), commande.getEntrepot().getCoordY(), 0, commande.getHeureDeDepart(), 9999);
 
@@ -90,7 +87,7 @@ public class ServiceMetier {
     /**
      * Chercher dans le Plan total la longueur de chemin plus courte de livraison origine vers destination
      */
-    private HashMap<Long, HashMap<Long, Chemin>> calcLePlusCourtChemin(long origineID) throws BadLinkException, EmptyListException {
+    private HashMap<Long, HashMap<Long, Chemin>> calcLePlusCourtChemin(long origineID) {
         //Chemin chemin = new Chemin();
         //System.out.println("origineID="+origineID);
         class dist implements Comparable<dist> {
@@ -263,7 +260,7 @@ public class ServiceMetier {
 //            TSPTW tsptw = new TSPTW(planLivraison, commande);
 //            tournee = tsptw.findSolution(20);
             GATSPTW ga = new GATSPTW(planLivraison, commande);
-            if(ga.findSolution(1000)==true)tournee = ga.getTournee();
+            if(ga.findSolution(1000))tournee = ga.getTournee();
             else tournee = null;
         } else {
             int tpsLimite = 1000;
@@ -363,6 +360,70 @@ public class ServiceMetier {
     public Tournee getTournee() {
         //System.out.println(tournee.getChemins());
         return tournee;
+    }
+
+    public void setCommande(Commande c) throws IOException, ClassNotFoundException {
+        this.commande = new Commande(c);
+    }
+
+    public void ajouterNouveauLivraison(Livraison livraison){
+        List <Chemin> listChemin = tournee.getChemins();
+        commande.getListLivraison().clear();
+        List<Livraison> newListLivraison = new ArrayList();
+        double [] arrivalTime = calculerArrivalTime();
+        HashMap<Long,Livraison> pl = planLivraison.getLivraisonsMap();
+        for(int i =0;i<listChemin.size()-1;i++){
+            Long destinationID = listChemin.get(i).getDestinationPointID();
+            Livraison l = pl.get(destinationID);
+            if(l.getHeureDeDebut()==0){
+                int hd = (int)arrivalTime[i];
+                int hf = (int)arrivalTime[i]+7200;//plage horaire = [t, t+1h]
+                Livraison temp = new Livraison(l.getId(),l.getCoordX(),l.getCoordY(),l.getDuree(),hd,hf);
+                newListLivraison.add(temp);
+            } else {
+                newListLivraison.add(l);
+            }
+        }
+        commande.setLivraisons(newListLivraison);
+        commande.addLivraison(livraison);
+    }
+
+    public double[] calculerArrivalTime(){
+        List<Chemin> chemins = tournee.getChemins();
+        List<Long> l = new ArrayList<Long>();
+        for(int i=0;i<chemins.size()-1;i++){
+            l.add(chemins.get(i).getDestinationPointID());
+        }
+        return calculeArrivalTime(l);
+    }
+    public double[] calculeArrivalTime(List<Long> l) {
+        //System.out.println("enter calculeArrivalTime");
+        double[] arrivalTimes = new double[l.size()+1];
+        double[] leaveTimes = new double[l.size()+1];
+        arrivalTimes[0] = commande.getHeureDeDepart();
+        leaveTimes[0] = commande.getHeureDeDepart();
+        HashMap<Long,Livraison> pl = planLivraison.getLivraisonsMap();
+        for (int i=1;i<=l.size();i++) {
+            long idStart = l.get(i-1);
+            double duree = pl.get(idStart).getDuree();
+            long idDes = i<l.size()?l.get(i):commande.getEntrepot().getId();
+            double longeur = planLivraison.getCheminsMap().get(idStart).get(idDes).getLongeur();
+            //System.out.println(idStart+"-->"+idDes+" "+longeur);
+            arrivalTimes[i] = leaveTimes[i-1] + duree + longeur/vitesse;
+            if (arrivalTimes[i]>pl.get(idDes).getHeureDeDebut()) {
+                leaveTimes[i] = arrivalTimes[i] + duree;
+            } else {
+                leaveTimes[i] = pl.get(idDes).getHeureDeDebut()+duree;
+            }
+        }
+        return arrivalTimes;
+    }
+    public ServiceMetier clone(){
+        try {
+            return (ServiceMetier) super.clone();
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
     }
 }
 

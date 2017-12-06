@@ -1,7 +1,5 @@
 package com.septanome.test;
 
-import com.septanome.exception.BadLinkException;
-import com.septanome.exception.EmptyListException;
 import com.septanome.model.Chemin;
 import com.septanome.service.ServiceMetier;
 
@@ -10,13 +8,13 @@ import java.io.IOException;
 
 public class Test {
 
-    public static void main(String[] argc) throws ClassNotFoundException, IOException, BadLinkException, EmptyListException {
+    public static void main(String[] argc) throws ClassNotFoundException, IOException {
 
         long startTime = System.currentTimeMillis();
 
         ServiceMetier sm = new ServiceMetier();
-        sm.initPlan("./src/test/resources/fichiersXML/planLyonGrand.xml");
-        sm.initCommande("./src/test/resources/fichiersXML/DLgrand10.xml");
+        sm.initPlan("fichiersXML/planLyonGrand.xml");
+        sm.initCommande("fichiersXML/DLgrand10TW2.xml");
         sm.initPlanLivraison();
         sm.calculerTournee(true);
         System.out.println("Test output:");

@@ -1,5 +1,7 @@
 package modelTests;
 
+import com.septanome.exception.BadLinkException;
+import com.septanome.exception.ConstructorException;
 import com.septanome.model.Chemin;
 import com.septanome.model.Tournee;
 import com.septanome.model.Troncon;
@@ -12,7 +14,7 @@ import static org.junit.Assert.assertTrue;
 
 public class TourneeTest {
     @Test
-    public void testTourneeConstructor(){
+    public void testTourneeConstructor() throws ConstructorException {
         Troncon t1 = new Troncon(1,0.5,"Avenue des Arts",5);
         Troncon t2 = new Troncon(3,0.3,"Rue de la Physique",1);
         List<Troncon> troncons = Arrays.asList(t1,t2);

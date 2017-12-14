@@ -72,7 +72,7 @@ public class Point {
 
     /**
      * Modifier id.
-     * @param id.
+     * @param idPoint.
      */
     public void setId(long id) {
         this.id = id;

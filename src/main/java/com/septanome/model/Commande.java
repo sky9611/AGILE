@@ -60,7 +60,7 @@ public class Commande {
 
     /**
      * modifier l'entrepot
-     * @param nouveau entrepot
+     * @param entrepot
      */
 
     public void setEntrepot(Point entrepot) {
@@ -78,7 +78,7 @@ public class Commande {
 
     /**
      * Ajouter une nouvelle livraison a la liste des livraisons.
-     * @param Livraison l
+     * @param livraison l
      */
 
     public void addLivraison(Livraison l) {
@@ -88,7 +88,7 @@ public class Commande {
 
     /**
      * Remplacer la liste des livraisons actuelle pour une nouvelle.
-     * @param List<Livraison> livraisons
+     * @param liste livraisons
      */
 
     public void setLivraisons(List<Livraison> livraisons) {

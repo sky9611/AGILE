@@ -16,7 +16,7 @@ public class Troncon {
 
     /**
      * Modifier destination
-     * @param long destinationID
+     * @param destinationID
      */
     public void setDestinationID(long destinationID) {
         this.destinationID = destinationID;
@@ -32,7 +32,7 @@ public class Troncon {
 
     /**
      * Modifier longeur
-     * @param double longeur
+     * @param  longeur
      */
     public void setLongeur(double longeur) {
         this.longeur = longeur;
@@ -48,7 +48,7 @@ public class Troncon {
 
     /**
      * Modifier nom
-     * @param String nom
+     * @param  nom
      */
     public void setNom(String nom) {
         this.nom = nom;
@@ -64,7 +64,7 @@ public class Troncon {
 
     /**
      * Modifier Origine
-     * @param long origineID
+     * @param origineID
      */
     public void setOrigineID(long origineID) {
         this.origineID = origineID;

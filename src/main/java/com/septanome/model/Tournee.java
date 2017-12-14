@@ -31,7 +31,7 @@ public class Tournee {
 
     /**
      * Remplacer la liste des chemins
-     * @param List<Chemin> nouvelleCheminList
+     * @param nouvelleCheminList
      */
 
     public void setChemins(List<Chemin> cheminList) {

@@ -85,7 +85,7 @@ public class Chemin {
 
     /**
      * remplacer la Liste des tronçon du chemin avec une nouvelle liste
-     * @param List<Troncon>troncons
+     * @param liste troncons
      */
 
     public void setTroncons(List<Troncon> troncons) {

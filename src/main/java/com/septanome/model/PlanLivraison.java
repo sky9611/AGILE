@@ -30,7 +30,7 @@ public class PlanLivraison {
 
     /**
      * Remplacer les livraisons
-     * @param HashMap<Long,Livraison> nouvelleLivraisonsMap
+     * @param nouvelleLivraisonsMap
      */
 
     public void setLivraisonsMap(HashMap<Long,Livraison> livraisonsMap) {
@@ -47,7 +47,7 @@ public class PlanLivraison {
 
     /**
      * Remplacer les chemin
-     * @param HashMap<Long,HashMap<Long,Chemin>> nouvelleCheminsMap.
+     * @param nouvelleCheminsMap.
      */
     public void setCheminsMap(HashMap<Long,HashMap<Long,Chemin>> cheminsMap) {
         this.cheminsMap = cheminsMap;

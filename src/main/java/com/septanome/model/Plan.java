@@ -54,7 +54,7 @@ public class Plan {
 
     /**
      * Remplacer les tronçon du plan
-     * @param HashMap<Long,HashMap<Long,Troncon>> NouvelletronconsMap
+     * @param  NouvelletronconsMap
      */
     public void setTronconsMap(HashMap<Long,HashMap<Long,Troncon>> tronconsMap) {
         this.tronconsMap = tronconsMap;

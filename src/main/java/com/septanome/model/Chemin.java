@@ -40,30 +40,62 @@ public class Chemin {
         }
     }
 
+    /**
+     * Obtenir le point destination
+     * @return id destination.
+     */
     public long getDestinationPointID(){
         return destinationPointID;
     }
+
+    /**
+     * modifier le point destination
+     * @param destinationPointID
+     */
 
     public void setDestinationPointID(long destinationPointID) {
         this.destinationPointID = destinationPointID;
     }
 
+    /**
+     * Obtenir le point origine
+     * @return id origine.
+     */
+
     public long getOriginePointID(){
         return originePointID;
     }
+
+    /**
+     * modifier le point origine
+     * @param originePointID
+     */
 
     public void setOriginePointID(long originePointID) {
         this.originePointID = originePointID;
     }
 
+    /**
+     * Obtenir liste des tronçon du chemin
+     * @return List<Troncon>
+     */
     public List<Troncon> getTroncons(){
         return troncons;
     }
+
+    /**
+     * remplacer la Liste des tronçon du chemin avec une nouvelle liste
+     * @param List<Troncon>troncons
+     */
 
     public void setTroncons(List<Troncon> troncons) {
         this.troncons = troncons;
     }
 
+    /**
+     * Obtenir la longeur du chemin.
+     * @return double longeur.
+     */
     public double getLongeur() {
         return longeur;
     }

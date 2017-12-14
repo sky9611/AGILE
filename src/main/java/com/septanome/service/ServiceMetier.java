@@ -27,7 +27,6 @@ public class ServiceMetier implements Cloneable{
     private Tournee tournee = new Tournee();
     private int nombreDeLivraison;
     private UtilXML myUtil = new UtilXML();
-    //private MyTSP tsp = new MyTSP();
     private TSP1 tsp = new TSP1();
     private static final double vitesse = 60000 / 3600;
 
@@ -71,13 +70,8 @@ public class ServiceMetier implements Cloneable{
 
         for (Livraison l : commande.getListLivraison()) {
             livraisonsMap.put(l.getId(), l);
-            //cm.clear();
         }
 
-//        System.out.println("livraisonsMap:");
-//        for(Map.Entry<Long, Livraison> entry:livraisonsMap.entrySet()){
-//            System.out.println(entry.getValue());
-//        }
 
         planLivraison.setLivraisonsMap(livraisonsMap);
         cheminsMap.putAll(calcLePlusCourtChemin(entrepot.getId()));
@@ -130,7 +124,6 @@ public class ServiceMetier implements Cloneable{
 
         while (!queue.isEmpty()) {
             dist d = queue.poll();
-            //System.out.println(d.index+" "+d.value);
             if(visited.get(d.index)==null) {
                 visited.put(d.index, d.value);
             }
@@ -138,9 +131,7 @@ public class ServiceMetier implements Cloneable{
                 continue;
             }
             neighbourList.clear();
-            //System.out.println(tronconMap.get((long)0).entrySet());
             for(Map.Entry<Long, Troncon> entry:tronconMap.get(d.index).entrySet()){
-                //System.out.println(entry.getKey()+" "+entry.getValue());
                 neighbourList.add(entry.getKey());
             }
             for(long i:neighbourList) {
@@ -184,8 +175,6 @@ public class ServiceMetier implements Cloneable{
      */
     public void calculerTournee(boolean b) throws ClassNotFoundException, IOException {
         if (b) {
-//            TSPTW tsptw = new TSPTW(planLivraison, commande);
-//            tournee = tsptw.findSolution(20);
             GATSPTW ga = new GATSPTW(planLivraison, commande);
             if(ga.findSolution(1000))tournee = ga.getTournee();
             else tournee = null;
@@ -201,11 +190,9 @@ public class ServiceMetier implements Cloneable{
                 long desID;
                 if (i == 0) {
                     startID = idEntrepot;
-                    //duree[(int) startID]=24*3600;
                     duree[i] = 0;
                 } else {
                     startID = listLivraisons.get(i - 1).getId();
-                    //duree[(int) startID]=(listLivraisons.get(i-1).getHeureDeFin()-listLivraisons.get(i-1).getHeureDeDebut())*3600;
                     duree[i] = listLivraisons.get(i - 1).getDuree();
                 }
 
@@ -220,31 +207,15 @@ public class ServiceMetier implements Cloneable{
                     }
                 }
             }
-//			for(int temp:duree) {
-//				System.out.println(temp);
-//			}
-//			for(int i=0;i<cheminsMap.size();i++) {
-//				for(int j=0;j<cheminsMap.size();j++) {
-//					long startID = (i==0)?idEntrepot:listLivraisons.get(i-1).getId();
-//					long desID = (j==0)?idEntrepot:listLivraisons.get(j-1).getId();
-//					System.out.println("cout("+startID+","+desID+"): "+cout[i][j]);
 //
-//				}
-//
-//			}
 
             tsp.chercheSolution(tpsLimite, cheminsMap.size(), cout, duree);
-//			System.out.println(tsp.getMeilleureSolution(0));
-//			System.out.println(tsp.getMeilleureSolution(1));
-//			System.out.println(tsp.getMeilleureSolution(2));
             List<Chemin> cheminList = new ArrayList<>();
             for (int k = 0; k < cheminsMap.size(); k++) {
                 if (k == 0) {
                     Chemin chemin = cheminsMap.get(idEntrepot).get(listLivraisons.get(tsp.getMeilleureSolution(k + 1) - 1).getId());
                     cheminList.add(chemin);
                 } else if (k < cheminsMap.size() - 1) {
-                    //System.out.println(listLivraisons.get(tsp.getMeilleureSolution(k)-1).getId());
-                    //System.out.println(listLivraisons.get(tsp.getMeilleureSolution(k+1)-1).getId());
                     Chemin chemin = cheminsMap.get(listLivraisons.get(tsp.getMeilleureSolution(k) - 1).getId()).get(listLivraisons.get(tsp.getMeilleureSolution(k + 1) - 1).getId());
                     cheminList.add(chemin);
                 } else {
@@ -252,31 +223,8 @@ public class ServiceMetier implements Cloneable{
                     cheminList.add(chemin);
                 }
             }
-            //System.out.println(cheminList);
-//			int[] dureeOrigin = duree;
-//			List<Chemin> cheminList = new ArrayList<>();
-//			myUtil.bubbleSort(duree);
-//			for(int k=0;k<duree.length;k++) {
-//				int indexStart;
-//				int indexDes;
-//				if (k!=duree.length-1) {
-//					indexStart = myUtil.getIndex(dureeOrigin, duree[k]);
-//					indexDes = myUtil.getIndex(dureeOrigin, duree[k+1]);
-//				} else {
-//					indexStart = myUtil.getIndex(dureeOrigin, duree[k]);
-//					indexDes = myUtil.getIndex(dureeOrigin, duree[0]);
-//				}
-//
-//				if (indexStart != 0) {
-//					Chemin chemin = cheminsMap.get(listLivraisons.get(indexStart-1).getId()).get(listLivraisons.get(indexDes-1).getId());
-//					cheminList.add(chemin);
-//				} else {
-//					Chemin chemin = cheminsMap.get(idEntrepot).get(listLivraisons.get(indexDes-1).getId());
-//					cheminList.add(chemin);
-//				}
-//			}
+
             tournee.setChemins(cheminList);
-            //System.out.println(tournee.getChemins());
         }
 
     }
@@ -285,7 +233,6 @@ public class ServiceMetier implements Cloneable{
      * Get tournee
      */
     public Tournee getTournee() {
-        //System.out.println(tournee.getChemins());
         return tournee;
     }
 
@@ -332,7 +279,6 @@ public class ServiceMetier implements Cloneable{
         return calculeArrivalTime(l);
     }
     public double[] calculeArrivalTime(List<Long> l) {
-        //System.out.println("enter calculeArrivalTime");
         double[] arrivalTimes = new double[l.size()+1];
         double[] leaveTimes = new double[l.size()+1];
         arrivalTimes[0] = commande.getHeureDeDepart();
@@ -343,7 +289,6 @@ public class ServiceMetier implements Cloneable{
             double duree = pl.get(idStart).getDuree();
             long idDes = i<l.size()?l.get(i):commande.getEntrepot().getId();
             double longeur = planLivraison.getCheminsMap().get(idStart).get(idDes).getLongeur();
-            //System.out.println(idStart+"-->"+idDes+" "+longeur);
             arrivalTimes[i] = leaveTimes[i-1] + duree + longeur/vitesse;
             if (arrivalTimes[i]>pl.get(idDes).getHeureDeDebut()) {
                 leaveTimes[i] = arrivalTimes[i] + duree;

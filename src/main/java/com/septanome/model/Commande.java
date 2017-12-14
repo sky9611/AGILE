@@ -26,34 +26,70 @@ public class Commande {
         this.livraisons = ll;
     }
 
+
     public Commande() {
         // TODO Auto-generated constructor stub
     }
+
+    /**
+     * Obtenir heure de depart.
+     * @return int heure.
+     */
 
     public int getHeureDeDepart() {
             return heureDeDepart;
     }
 
+    /**
+     * Modifier l'heure de depart.
+     * @param heureDeDepart
+     */
+
     public void setHeureDeDepart(int heureDeDepart) {
         this.heureDeDepart = heureDeDepart;
     }
+
+    /**
+     * Pour obtenir l'entrepot.
+     * @return Point entrepot
+     */
 
     public Point getEntrepot() {
         return entrepot;
     }
 
+    /**
+     * modifier l'entrepot
+     * @param entrepot
+     */
+
     public void setEntrepot(Point entrepot) {
         this.entrepot = entrepot;
     }
+
+    /**
+     * obtenir la liste des livraisons de la commande.
+     * @return List<Livraison>
+     */
 
     public List<Livraison> getListLivraison(){
         return livraisons;
     }
 
+    /**
+     * Ajouter une nouvelle livraison a la liste des livraisons.
+     * @param livraison l
+     */
+
     public void addLivraison(Livraison l) {
         this.livraisons.add(l);
     }
 
+
+    /**
+     * Remplacer la liste des livraisons actuelle pour une nouvelle.
+     * @param liste livraisons
+     */
 
     public void setLivraisons(List<Livraison> livraisons) {
         this.livraisons = livraisons;

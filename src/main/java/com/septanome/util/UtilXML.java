@@ -24,6 +24,8 @@ import java.util.Vector;
 public class UtilXML {
 
     /**
+     * charger le plan de livraison
+     *
      * @param folder Path to XML file
      */
     public HashMap<Long, Point> loadPoint(String folder) {
@@ -222,6 +224,11 @@ public class UtilXML {
         return point;
     }
 
+    /**
+     * generer le fichier pour le chauffeur
+     * @param filename fichier de sortie
+     * @param serviceMetier
+     */
     public void writeTourneeToFile(String filename, ServiceMetier serviceMetier) {
         String content = new String();
         List<Chemin> cheminList;
@@ -241,9 +248,9 @@ public class UtilXML {
                 content += tronconList.get(j).toString();
                 content += "\n";
             }
-            if(i<cheminList.size()-1) {
+            /*if(i<cheminList.size()-1) {
                 content += "depart time is: " + Double.toString(arrivalTim[i]/3600) + "\n";
-            }
+            }*/
             content += "livraison " + i + " est termine\n\n\n";
         }
         try {

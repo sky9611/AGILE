@@ -32,4 +32,8 @@ public class TestUtilXML {
         assertTrue(pointUnderTest.getCoordX()== 15427);
         assertTrue(pointUnderTest.getCoordY() == 27866);
     }
+
+    @Test public void testTronconLoaded(){
+        //TODO test whether UtilXML can load the troncons
+    }
 }

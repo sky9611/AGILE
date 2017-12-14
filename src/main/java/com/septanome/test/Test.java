@@ -15,8 +15,8 @@ public class Test {
         long startTime = System.currentTimeMillis();
 
         ServiceMetier sm = new ServiceMetier();
-        sm.initPlan("fichiersXML/planLyonGrand.xml");
-        sm.initCommande("fichiersXML/DLgrand10TW2.xml");
+        sm.initPlan("./src/test/resources/fichiersXML/planLyonGrand.xml");
+        sm.initCommande("./src/test/resources/fichiersXML/DLgrand10TW2.xml");
         sm.initPlanLivraison();
         sm.calculerTournee(true);
         System.out.println("Test output:");

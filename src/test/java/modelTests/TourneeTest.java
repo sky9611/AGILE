@@ -1,6 +1,5 @@
 package modelTests;
 
-import com.septanome.exception.BadLinkException;
 import com.septanome.exception.ConstructorException;
 import com.septanome.model.Chemin;
 import com.septanome.model.Tournee;

@@ -1,5 +1,7 @@
 package com.septanome.test;
 
+import com.septanome.exception.BadLinkException;
+import com.septanome.exception.EmptyListException;
 import com.septanome.model.Chemin;
 import com.septanome.service.ServiceMetier;
 
@@ -8,7 +10,7 @@ import java.io.IOException;
 
 public class Test {
 
-    public static void main(String[] argc) throws ClassNotFoundException, IOException {
+    public static void main(String[] argc) throws ClassNotFoundException, IOException, BadLinkException, EmptyListException {
 
         long startTime = System.currentTimeMillis();
 

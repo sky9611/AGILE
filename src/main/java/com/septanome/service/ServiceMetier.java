@@ -1,5 +1,7 @@
 package com.septanome.service;
 
+import com.septanome.exception.BadLinkException;
+import com.septanome.exception.EmptyListException;
 import com.septanome.model.*;
 import com.septanome.util.GATSPTW;
 import com.septanome.util.UtilXML;
@@ -29,7 +31,7 @@ public class ServiceMetier implements Cloneable{
     private TSP1 tsp = new TSP1();
     private static final double vitesse = 60000 / 3600;
 
-    public void init(String nomFicherDePlan, String nomFicherDeCommande) {
+    public void init(String nomFicherDePlan, String nomFicherDeCommande) throws BadLinkException, EmptyListException {
         initPlan(nomFicherDePlan);
         initCommande(nomFicherDeCommande);
         initPlanLivraison();
@@ -58,14 +60,14 @@ public class ServiceMetier implements Cloneable{
     /**
      * Initialiser le plan avec que les points de livraison et les routes les plus courts entre eux calcules par dijkstra
      */
-    public void initPlanLivraison() {
+    public void initPlanLivraison() throws BadLinkException, EmptyListException {
         //l'entrepot est considere comme un objet Livraison dont l'attribut heureDeDepart devient heureDeDebut et heureDeFin est 9999 par defaut
         Livraison entrepot = new Livraison(commande.getEntrepot().getId(), commande.getEntrepot().getCoordX(), commande.getEntrepot().getCoordY(), 0, commande.getHeureDeDepart(), 9999);
 
         HashMap<Long, Livraison> livraisonsMap = new HashMap<>();
         livraisonsMap.put(entrepot.getId(), entrepot);
         HashMap<Long, HashMap<Long, Chemin>> cheminsMap = new HashMap<>();
-        //HashMap<Long,Chemin> cm = new HashMap<Long,Chemin>();
+
 
         for (Livraison l : commande.getListLivraison()) {
             livraisonsMap.put(l.getId(), l);
@@ -92,9 +94,7 @@ public class ServiceMetier implements Cloneable{
      * @param origineID id de point d'origine
      * @return plan du chemin
      */
-    private HashMap<Long, HashMap<Long, Chemin>> calcLePlusCourtChemin(long origineID) {
-        //Chemin chemin = new Chemin();
-        //System.out.println("origineID="+origineID);
+    private HashMap<Long, HashMap<Long, Chemin>> calcLePlusCourtChemin(long origineID) throws BadLinkException, EmptyListException {
         class dist implements Comparable<dist> {
             private long index;
             private double value;
@@ -109,7 +109,6 @@ public class ServiceMetier implements Cloneable{
                 return Double.compare(this.value, o.value);
             }
         }
-        //HashMap<Long, Integer> indexMap = new HashMap<Long, Integer>();
         HashMap<Long, Point> pointsMap = plan.getPointsMap();
         HashMap<Long, Long> prev = new HashMap<>();
         HashMap<Long, Livraison> livraisonsMap = planLivraison.getLivraisonsMap();
@@ -117,34 +116,11 @@ public class ServiceMetier implements Cloneable{
         List<Long> neighbourList = new ArrayList<>();
 
         PriorityQueue<dist> queue = new PriorityQueue<>(pointsMap.size());
-//        dist[] distArray = new dist[pointsMap.size() + 1];
-//        HashSet<Long> s = new HashSet<>();
-//        int ii = 0;
-//        for (Map.Entry<Long, Point> entry : pointsMap.entrySet()) {
-//            long pointID = entry.getKey();
-//            HashMap<Long, Troncon> tempMap = tronconMap.get(origineID);
-//            if (tempMap.containsKey(pointID)) {
-//                dist d = new dist(pointID, tempMap.get(pointID).getLongeur());
-//                queue.add(d);
-//                distArray[ii] = d;
-//            } else {
-//                dist d = new dist(pointID, noPath);
-//                queue.add(d);
-//                distArray[ii] = d;
-//            }
-//        }
-//        s.add(origineID);
-        //Map<Long, Double> map=new HashMap<Long, Double>();
-        //map.put(origineID, 0.0);
-//        for (Map.Entry<Long, Point> entry : pointsMap.entrySet()) {
-//            distMap.put(entry.getKey(), (double) noPath);
-//        }
+
 
         queue.add(new dist(origineID, 0.0));
         Map<Long, Double> visited = new HashMap<>();
 
-        //System.out.println(distMap);
-        //System.out.println(plan.getTronconsMap());
         List<Long> destinationList = new ArrayList<>();
         for (Map.Entry<Long, Livraison> entry : livraisonsMap.entrySet()) {
             long key = entry.getKey();
@@ -177,76 +153,22 @@ public class ServiceMetier implements Cloneable{
                 dist d2 = new dist(i,newlength);
                 queue.add(d2);
             }
-//            neighbourList.clear();
-//            long idStart = queue.element().index;
-//            //System.out.println(tronconMap.get((long)0).entrySet());
-//            for(Map.Entry<Long, Troncon> entry:tronconMap.get(idStart).entrySet()){
-//                //System.out.println(entry.getKey()+" "+entry.getValue());
-//                neighbourList.add(entry.getKey());
-//            }
-//            for(long i:neighbourList) {
-//
-//                long idDes = i;
-//                if (distMap.get(idDes) > distMap.get(idDes)+tronconMap.get(idStart).get(idDes).getLongeur()) {
-//                    System.out.println("asdasd");
-//                    distMap.put(idDes, distMap.get(idDes)+tronconMap.get(idStart).get(idDes).getLongeur());
-//                    dist d = new dist(idDes,distMap.get(idDes));
-//                    prev.put(idDes, d.index);
-//                    queue.add(d);
-//                }
-//            }
-//            queue.poll();
-//            count++;
-//            dist d = queue.poll();
-//            if (d==null)break;
-//            long idStart = d.index;
-//            mark.put(idStart,1);
-//            neighbourList.clear();
-//            //System.out.println(tronconMap.get((long)0).entrySet());
-//            for(Map.Entry<Long, Troncon> entry:tronconMap.get(idStart).entrySet()){
-//                //System.out.println(entry.getKey()+" "+entry.getValue());
-//                neighbourList.add(entry.getKey());
-//            }
-//            for(long i:neighbourList) {
-//                long idDes = i;
-//                if (distMap.get(idDes) > distMap.get(idDes) + tronconMap.get(idStart).get(idDes).getLongeur()) {
-//                    System.out.println("asdasd");
-//                    distMap.put(idDes, distMap.get(idDes) + tronconMap.get(idStart).get(idDes).getLongeur());
-//                    dist dd = new dist(idDes, distMap.get(idDes));
-//                    prev.put(idDes, dd.index);
-//                    queue.add(dd);
-//                }
-//            }
         }
         HashMap<Long, HashMap<Long, Chemin>> cheminMap = new HashMap<>();
         HashMap<Long, Chemin> origineCheminMap = new HashMap<>();
 
-//        System.out.println("prev map:");
-//        for(Map.Entry<Long, Long> entry:prev.entrySet()){
-//        	System.out.println(entry.getKey()+" "+entry.getValue());
-//		}
-//        System.out.println(origineID + "'s prev map size = " + prev.size());
-//        System.out.println(origineID + "'s visited map size = " + distMap.size());
-//        System.out.println("From " + destinationList.get(0) + " to " + prev.get(destinationList.get(0)));
-
-        //System.out.println(destinationList);
-        //System.out.println(tronconMap);
         for (long id : destinationList) {
             List<Troncon> tronconList = new ArrayList<>();
             long tempDes = id;
             long tempSta;
-            //System.out.println(origineID + "-->" + id + " length:" + distMap.get(id));
-            //System.out.println("From "+origineID+" to "+id);
             while (prev.get(tempDes) != null) {
                 tempSta = prev.get(tempDes);
-                //System.out.println(tronconMap.get(tempSta).get(tempDes));
                 tronconList.add(tronconMap.get(tempSta).get(tempDes));
                 tempDes = tempSta;
             }
 
             Collections.reverse(tronconList);
             Chemin chemin = new Chemin(id, origineID, tronconList);
-            //System.out.println(tronconList.size()+" "+chemin);
             origineCheminMap.put(id, chemin);
         }
         cheminMap.put(origineID, origineCheminMap);

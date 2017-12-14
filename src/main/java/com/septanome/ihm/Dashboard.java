@@ -1,5 +1,7 @@
 package com.septanome.ihm;
 
+import com.septanome.exception.BadLinkException;
+import com.septanome.exception.EmptyListException;
 import com.septanome.model.Commande;
 import com.septanome.model.Livraison;
 import com.septanome.model.Point;
@@ -516,7 +518,13 @@ public class Dashboard extends JFrame implements ActionListener{
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-            serviceMetier.initPlanLivraison();
+            try {
+                serviceMetier.initPlanLivraison();
+            } catch (BadLinkException e) {
+                e.printStackTrace();
+            } catch (EmptyListException e) {
+                e.printStackTrace();
+            }
             try {
                 do{
                     serviceMetier.calculerTournee(true);
@@ -544,7 +552,13 @@ public class Dashboard extends JFrame implements ActionListener{
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-            serviceMetier.initPlanLivraison();
+            try {
+                serviceMetier.initPlanLivraison();
+            } catch (BadLinkException e) {
+                e.printStackTrace();
+            } catch (EmptyListException e) {
+                e.printStackTrace();
+            }
             try {
                 do{
                     serviceMetier.calculerTournee(true);
